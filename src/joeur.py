@@ -10,4 +10,7 @@ def attack():
 
     attacker.attack(defender)
 
-    assert defender.hp == 90
+     for _ in range(15):
+        attacker.attack(defender)
+
+    assert defender.hp == 0
