@@ -29,3 +29,29 @@ def test_player_death():
     #IL DOIT avoir 0 hp et ne plus être en vie
     assert monster.hp == 0
     assert monster.is_alive() is False
+
+def test_player_kill():
+    #ETANT DONNE DEUX PERSONNAGES monstre et hero
+    hero = Character("Hero")
+    monster = Character("Monster")
+
+    #QUAND MONSTRE TAPE HERO 10 FOIS
+    for i in range(10):
+        monster.attack(hero)
+    
+    #Hero doit mourir et avoir 0 hp
+    assert hero.hp == 0
+    assert hero.is_alive() is False
+
+def test_player_over_damage():
+    #ETANT DONNE DEUX PERSONNAGES monstre et hero
+    hero = Character("Hero")
+    monster = Character("Monster")
+
+    #QUAND MONSTRE TAPE HERO 12 FOIS
+    for i in range(12):
+        monster.attack(hero)
+    
+    #Hero doit mourir et avoir 0 hp
+    assert hero.hp == 0
+    assert hero.is_alive() is False
