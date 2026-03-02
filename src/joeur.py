@@ -1,12 +1,12 @@
-from joeur import Player
+from joeur import Joeur
 
 def joeur_100():
-    joeur = Player()
+    joeur = Joeur()
     assert joeur.hp == 100
 
 def attack():
-    attacker = Player()
-    defender = Player()
+    attacker = Joeur()
+    defender = Joeur()
 
     attacker.attack(defender)
 
