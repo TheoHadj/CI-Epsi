@@ -1,4 +1,4 @@
-from src.personnage import Personnage
+from personnage import Personnage
 
 def test_points_vie():
     # Étant donné un personnage

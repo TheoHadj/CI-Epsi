@@ -1,4 +1,4 @@
-from src.personnage import Personnage
+from personnage import Personnage
 
 def test_points_vie():
     # Étant donné un personnage
@@ -7,4 +7,4 @@ def test_points_vie():
     for i in range (10):
             perso.subir_degats()
     # Ses points de vie sont à 0
-    assert perso.get_points_vie() == 10
+    assert perso.get_points_vie() == 0
