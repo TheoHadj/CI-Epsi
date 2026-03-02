@@ -32,13 +32,33 @@ jobs:
         id: tests
         run: |
           pytest test/ -v
+        continue-on-error: true
 
       - name: Fast-forward master into dev
-        if: success()
+        if: steps.tests.outcome == 'success'
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git fetch origin master
           git checkout dev
-          git merge --ff-only origin/master
+          git merge --ff-only origin/master || echo "No changes to merge"
           git push origin dev
+
+      - name: Handle test failure
+        if: steps.tests.outcome != 'success'
+        run: |
+          echo "Tests failed → creating failure branch and rolling back dev"
+
+          FAILURE_BRANCH="failure/${GITHUB_RUN_NUMBER}"
+          DEV_BRANCH="dev"
+          CURRENT_SHA=$(git rev-parse HEAD)
+          PREV_SHA=$(git rev-parse HEAD^)
+
+          # Créer branche
+          git checkout -b $FAILURE_BRANCH
+          git push origin $FAILURE_BRANCH
+
+          # Rollback dev
+          git checkout $DEV_BRANCH
+          git reset --hard $PREV_SHA
+          git push origin $DEV_BRANCH --force
