@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "Tests failed → creating failure branch and rolling back dev"
 
-          FAILURE_BRANCH="failure/${GITHUB_RUN_NUMBER}"
+          FAILURE_BRANCH="failure/${SHORT_SHA}"
           DEV_BRANCH="dev"
           CURRENT_SHA=$(git rev-parse HEAD)
           PREV_SHA=$(git rev-parse HEAD^)
