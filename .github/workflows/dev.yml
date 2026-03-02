@@ -1,0 +1,64 @@
+name: Dev CI
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  test-and-ff:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        id: tests
+        run: |
+          pytest test/ -v
+        continue-on-error: true
+
+      - name: Fast-forward master into dev
+        if: steps.tests.outcome == 'success'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git fetch origin master
+          git checkout master
+          git merge --ff-only ${{ github.sha }}
+          git push origin master
+
+      - name: Handle test failure
+        if: steps.tests.outcome != 'success'
+        run: |
+          echo "Tests failed → creating failure branch and rolling back dev"
+
+          FAILURE_BRANCH="failure/${GITHUB_RUN_NUMBER}"
+          DEV_BRANCH="dev"
+          CURRENT_SHA=$(git rev-parse HEAD)
+          PREV_SHA=$(git rev-parse HEAD^)
+
+          # Créer branche
+          git checkout -b $FAILURE_BRANCH
+          git push origin $FAILURE_BRANCH
+
+          # Rollback dev
+          git checkout $DEV_BRANCH
+          git reset --hard $PREV_SHA
+          git push origin $DEV_BRANCH --force
