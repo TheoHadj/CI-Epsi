@@ -44,21 +44,23 @@ jobs:
           git merge --ff-only ${{ github.sha }}
           git push origin master
 
-      - name: Handle test failure
-        if: steps.tests.outcome != 'success'
+      - name: Tests failed → creating failure branch and rolling back dev
+        if: failure()
         run: |
-          echo "Tests failed → creating failure branch and rolling back dev"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
+          SHORT_SHA=$(git rev-parse --short HEAD)
           FAILURE_BRANCH="failure/${SHORT_SHA}"
           DEV_BRANCH="dev"
-          CURRENT_SHA=$(git rev-parse HEAD)
+          
           PREV_SHA=$(git rev-parse HEAD^)
 
-          # Créer branche
+          echo "Tests failed on commit ${SHORT_SHA}. Creating branch ${FAILURE_BRANCH}"
+
           git checkout -b $FAILURE_BRANCH
           git push origin $FAILURE_BRANCH
 
-          # Rollback dev
           git checkout $DEV_BRANCH
           git reset --hard $PREV_SHA
           git push origin $DEV_BRANCH --force
