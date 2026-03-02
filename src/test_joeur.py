@@ -1,4 +1,4 @@
-class Player:
+class Joeur:
     def __init__(self):
         self.hp = 100
     def attack(self, other):
