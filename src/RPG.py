@@ -4,7 +4,7 @@ class Character:
         # self.hp = hp
         self.hp = 10
         # self.attack_power = attack_power
-        self.attack_power=1
+        self.attack_power = 1
         
     def is_alive(self):
         return self.hp > 0
