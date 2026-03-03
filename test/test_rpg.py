@@ -63,5 +63,13 @@ def test_player_over_damage():
 def test_dead_player_cant_attack():
     #ETANT DONNE DEUX PERSONNAGES monstre et hero 
     hero = Character()
+    heroHp0=hero.hp
     monster = Character()
+
+    #QUAND MONSTRE EST MORT ET QU'IL ATTAQUE
+    while(monster.hp>0):
+        hero.attack(monster)
+
+    #ALORS MONSTRE NE FAIT PAS DE DEGAT A HERO.
+    assert hero.hp==heroHp0
 
