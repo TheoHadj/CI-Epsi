@@ -10,9 +10,14 @@ class Personnage:
     def __init__(self):
         self.hp = 10
 
-    def attaquer(self, autre):
-        if autre.hp > 0:
-            autre.hp -= 1
+     def attaquer(self, autre):
+        if not self.est_vivant():
+            return
+        if not autre.est_vivant():
+            return
+
+        autre.hp -= 1
 
     def est_vivant(self):
         return self.hp > 0
+
