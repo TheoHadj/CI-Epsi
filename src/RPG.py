@@ -15,5 +15,5 @@ class Character:
             self.hp = 0
 
     def attack(self, target):
-        target.take_damage(self.attack_power)
-        return self.attack_power
+        if self.is_alive():
+            target.take_damage(self.attack_power)
