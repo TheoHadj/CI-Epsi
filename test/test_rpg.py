@@ -59,3 +59,9 @@ def test_player_over_damage():
     #Hero doit mourir et ne pas perdre plus d'hp que 0
     assert hero.hp == 0
     assert hero.is_alive() is False
+ 
+def test_dead_player_cant_attack():
+    #ETANT DONNE DEUX PERSONNAGES monstre et hero 
+    hero = Character()
+    monster = Character()
+
