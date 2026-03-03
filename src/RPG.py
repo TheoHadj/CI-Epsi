@@ -10,9 +10,10 @@ class Character:
         return self.hp > 0
 
     def take_damage(self, amount):
-        self.hp -= amount
-        if self.hp < 0:
-            self.hp = 0
+        if isinstance(amount, (int, float)) and amount > 0:
+            self.hp -= amount
+            if self.hp < 0:
+                self.hp = 0
 
     def attack(self, target):
         if self.is_alive():

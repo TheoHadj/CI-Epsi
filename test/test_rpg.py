@@ -73,3 +73,19 @@ def test_dead_player_cant_attack():
     #ALORS MONSTRE NE FAIT PAS DE DEGAT A HERO.
     assert hero.hp==heroHp0
 
+def test_valid_take_damage_argument():
+    # Etant donné un personnage
+    hero = Character()
+    hero_base_hp = hero.hp
+    
+    # Lorsqu'un personnage subit des dégats, et que la valeur des dégats subits n'est pas un nombre supérieur à 0
+    hero.take_damage(-1)
+    
+    # Alors le monstre ne doit pas perdre points de vie
+    assert hero.hp == hero_base_hp
+
+    hero.take_damage("1")
+    assert hero.hp == hero_base_hp
+    
+    hero.take_damage(hero)
+    assert hero.hp == hero_base_hp
