@@ -55,3 +55,20 @@ def test_player_over_damage():
     #Hero doit mourir et avoir 0 hp
     assert hero.hp == 0
     assert hero.is_alive() is False
+    
+def test_valid_take_damage_argument():
+    # Etant donné un personnage
+    hero = Character("feur")
+    hero_base_hp = hero.hp
+    
+    # Lorsqu'un personnage subit des dégats, et que la valeur des dégats subits n'est pas un nombre supérieur à 0
+    hero.take_damage(-1)
+    
+    # Alors le monstre ne doit pas perdre points de vie
+    assert hero.hp == hero_base_hp
+
+    hero.take_damage("1")
+    assert hero.hp == hero_base_hp
+    
+    hero.take_damage(hero)
+    assert hero.hp == hero_base_hp
