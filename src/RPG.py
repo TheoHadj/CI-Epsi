@@ -6,19 +6,13 @@
     
 #if(__name__ == "__main__"):
 #    main()
-from joeur import Joeur
+class Personnage:
+    def __init__(self):
+        self.hp = 10
 
-def joeur_100():
-    joeur = Joeur()
-    assert joeur.hp == 100
+    def attaquer(self, autre):
+        if autre.hp > 0:
+            autre.hp -= 1
 
-def attack():
-    attacker = Joeur()
-    defender = Joeur()
-
-    attacker.attack(defender)
-
-     for _ in range(15):
-        attacker.attack(defender)
-
-    assert defender.hp == 0
+    def est_vivant(self):
+        return self.hp > 0
