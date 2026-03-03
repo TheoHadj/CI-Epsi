@@ -1,4 +1,5 @@
 from personnage import Personnage
+from combat import Combat
 
 
 def test_personnage_commence_avec_10_hp():
@@ -24,14 +25,23 @@ def test_personnage_meurt_a_zero():
 
     assert p.est_vivant() is False
 
+#def test_un_mort_ne_peut_pas_attaquer():
+  #  attaquant = Personnage()
+  #  defenseur = Personnage()
+
+  #  attaquant.hp = 0  # mort
+  #  attaquant.attaquer(defenseur)
+
+  #  assert defenseur.hp == 10  # aucun dégât
+
 def test_un_mort_ne_peut_pas_attaquer():
-    attaquant = Personnage()
-    defenseur = Personnage()
+    p1 = Personnage()
+    p2 = Personnage()
 
-    attaquant.hp = 0  # mort
-    attaquant.attaquer(defenseur)
+    p1.hp = 0
+    p1.attaquer(p2)
 
-    assert defenseur.hp == 10  # aucun dégât
+    assert p2.hp == 10
 
 
 def test_on_ne_peut_pas_attaquer_un_mort():
@@ -42,3 +52,13 @@ def test_on_ne_peut_pas_attaquer_un_mort():
     attaquant.attaquer(defenseur)
 
     assert defenseur.hp == 0  # reste mort
+
+def test_combat_tour_par_tour_jusqua_mort():
+    p1 = Personnage()
+    p2 = Personnage()
+
+    combat = Combat(p1, p2)
+    gagnant = combat.lancer()
+
+    assert gagnant.est_vivant()
+    assert not (p1.est_vivant() and p2.est_vivant())
