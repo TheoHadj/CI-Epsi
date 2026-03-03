@@ -2,15 +2,15 @@ from src.RPG import Character
 
 def test_player_initialization():
     #ETANT DONNE UN PERSONNAGE
-    p = Character("Guerrier")
+    p = Character()
 
     #doit avec hp==10
     assert p.hp == 10
 
 def test_attack_reduces_hp():
     # ETANT DONNE deux personnages un monstre et un hero avec 10 PV
-    hero = Character("Hero")
-    monster = Character("Gobelin")
+    hero = Character()
+    monster = Character()
     hp0 = monster.hp
 
     #QUAND LE HERO ATTAQUE LE MONSTRE
@@ -21,7 +21,7 @@ def test_attack_reduces_hp():
 
 def test_player_death():
     #ETANT DONNE UN PERSONNAGE
-    monster = Character("Gobelin")
+    monster = Character()
 
     #QUAND IL PREND DES ASSEZ DE COUPS
     while(monster.hp>0) :
@@ -33,8 +33,8 @@ def test_player_death():
 
 def test_player_kill():
     #ETANT DONNE DEUX PERSONNAGES monstre et hero
-    hero = Character("Hero")
-    monster = Character("Monster")
+    hero = Character()
+    monster = Character()
 
     #QUAND MONSTRE TAPE HERO 10 FOIS
     while(hero.hp>0) :
@@ -46,8 +46,8 @@ def test_player_kill():
 
 def test_player_over_damage():
     #ETANT DONNE DEUX PERSONNAGES monstre et hero
-    hero = Character("Hero")
-    monster = Character("Monster")
+    hero = Character()
+    monster = Character()
 
     #QUAND MONSTRE TAPE ASSEZ LE HERO POUR QU'IL MEURT, PUIS TAPE DEUX FOIS DE PLUS 
     while(hero.hp>0):
