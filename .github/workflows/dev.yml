@@ -40,8 +40,12 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git fetch origin master
+          TEMP_BRANCH="temp-${{ github.run_id }}-$(date +%s)"
+          echo "Using temp branch: $TEMP_BRANCH"
+          git checkout -b "$TEMP_BRANCH" ${{ github.sha }}
           git checkout master
-          git merge --ff-only ${{ github.sha }}
+          git merge --ff-only "$TEMP_BRANCH"
+          git branch -d "$TEMP_BRANCH"
           git push origin master
 
       - name: Tests failed → creating failure branch and rolling back dev
