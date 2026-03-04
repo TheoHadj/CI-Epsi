@@ -16,8 +16,8 @@ def test_attack_reduces_hp():
     #QUAND LE HERO ATTAQUE LE MONSTRE
     hero.attack(monster)
 
-    #LE MONSTRE doit perdre 1 hp
-    assert hp0 - monster.hp == 1
+    #LE MONSTRE doit perdre l'attack power de l'attaquant
+    assert hp0 - monster.hp == hero.attack_power
 
 def test_player_death():
     #ETANT DONNE UN PERSONNAGE
@@ -36,7 +36,7 @@ def test_player_kill():
     hero = Character()
     monster = Character()
 
-    #QUAND MONSTRE TAPE HERO 10 FOIS
+    #QUAND MONSTRE TAPE HERO JUSQU'A 0 HP
     while(hero.hp>0) :
         monster.attack(hero)
     
@@ -106,6 +106,29 @@ def test_end_impact_hp():
     #Alors ces hp sont égaux à baseHp + son endurance
     assert hero.hp == hero.baseHp + hero.endurance 
     
+def test_levelUp():
+    #Etant donné un personnage
+    hero = Character()
+    
+    damage0= hero.attack_power
+    hp0= hero.hp
+
+    #Quand il gagne un niveau
+    hero.levelUp()
+
+    #Alors ses dégats et ses hp augmente de deux
+    assert hero.attack_power == damage0+2
+    assert hero.hp == hp0+2
+
+    #Quand il gagne un autre niveau
+    hero.levelUp()
+
+    #Alors ses dégats et ses hp augmente de quatre (2*lvl)
+    assert hero.attack_power == damage0+4
+    assert hero.hp == hp0+4
+     
+
+
 def test_caracteristique_force():
     # Étant donné un personnage
     perso = Character()
