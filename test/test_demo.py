@@ -1,4 +1,4 @@
-from src.RPG import Character
+from src.RPG import Character, Equipe, Duel
 
 def test_demo_arme():
     # étant donné un personnage
@@ -42,7 +42,6 @@ def test_demo_arme_attaque_baisse():
     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
 
 
-
 def test_deux_persos_armures():
     #Etant donné trois personnages, hero possédant une armure de 50, un hero sans et monstre 
     hero = Character(50)
@@ -61,3 +60,55 @@ def test_deux_persos_armures():
 
     assert hero.hp == h0 
     assert hero.hp != hero2.hp
+    
+    def test_demo_equipes():
+        # Étant donné quatre personnage
+        eq1_p1 = Character(1.5)
+        eq1_p2 = Character(0.9)
+        eq2_p1 = Character(1.1)
+        eq2_p2 = Character(1.2)
+        
+        # Lorsque l'on créé deux équipes
+        equipe_1 = Equipe(eq1_p1, eq1_p2)
+        equipe_2 = Equipe(eq2_p1, eq2_p2)
+        
+        # Alors chaque équipe est composé de deux personnages
+        assert equipe_1.perso_1.hp > 0
+        assert equipe_1.perso_2.hp > 0
+        
+        assert equipe_2.perso_1.hp > 0
+        assert equipe_2.perso_2.hp > 0
+        
+        
+    def test_demo_duel():
+        # Étant deux équipes
+        eq1_p1 = Character(1.5)
+        eq1_p2 = Character(0.9)
+        eq2_p1 = Character(1.1)
+        eq2_p2 = Character(1.2)
+        equipe_1 = Equipe(eq1_p1, eq1_p2)
+        equipe_2 = Equipe(eq2_p1, eq2_p2)
+        
+        # Lorsque l'on créé un duel
+        duel = Duel(equipe_1, equipe_2)
+        
+        # Alors le duel est bien composé de deux équipe de deux joueurs chacune
+        assert duel.hp_equipe(equipe_1) == 20
+        assert duel.hp_equipe(equipe_2) == 20
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+
+    
+
+    
+    
+    
