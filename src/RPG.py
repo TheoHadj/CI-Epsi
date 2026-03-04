@@ -12,12 +12,14 @@ class Character:
         self.attack_power = 2*self.baseAttack_power* self.lvl
         self.endurance = 2*self.baseEndurance * self.lvl
         self.hp = self.baseHp + self.endurance
+        self.force = 0
         
     def is_alive(self):
         return self.hp > 0
 
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
+            amount = int(amount) + self.force
             self.hp -= amount
             if self.hp < 0:
                 self.hp = 0
