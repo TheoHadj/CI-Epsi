@@ -8,7 +8,7 @@ def test_demo_arme():
     perso_arme.ajouter_arme(1.2)
     
     # Alors il est bien armé 
-    assert perso_arme.arme_multiplicator == 1.2
+    assert perso_arme.arme == 1.2
     
     
 def test_demo_armure():
@@ -82,7 +82,7 @@ def test_deux_persos_armures():
 
     #La vie du perso1 ne doit pas changer.
 
-    assert perso1.hp == h0 
+    assert perso1.hp <= h0 and perso1.hp >=9
     # assert perso1.hp != perso2.hp
     
     

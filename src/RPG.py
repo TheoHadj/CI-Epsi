@@ -1,26 +1,37 @@
 import random
 
 class Character:
-    def __init__(self,level:int,end:int,force:int, armor:int = 0,  arme:int=1):
+    def __init__(self, force:int=0, endurance:int=0, agilite:int=0, chance:int=0, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
         if not (0 <= int(armor) <= 100):
             raise ValueError("L'armure doit être comprise entre 0 et 100")
-        if (arme < 0):
-            raise ValueError("Le multiplicateur d'arme ne peut pas être négatif")
-        if(level<=0):
-            raise ValueError("Le niveau doit être strictement positif")
-
+        
+        self.baseEndurance = 1
         self.baseHp = 10
+        self.baseForce = 1
+       
+        self.lvl = 0
 
-        self.lvl = level
-        self.force = force
-        self.endurance = end
-        self.hp = self.baseHp + self.endurance + 2*self.lvl
-        self.armor = armor        
-        self.arme = arme
+        self.force = 0
+        self.endurance = 0
+        self.hp = 10
 
+        self.armor = armor
+        
+        self.arme = arme if arme > 0 else 1
+        self.attack
+        self.agilite = agilite
+        self.chance = chance
+    
+    def ajouter_arme(self, arme:int):
+        self.arme = arme if arme > 0 else 1
+
+    def ajouter_armure(self, armor:int):
+        if not (0 <= int(armor) <= 100):
+            raise ValueError("L'armure doit être comprise entre 0 et 100")
+        self.armor = armor
                 
     def is_alive(self):
         return self.hp > 0
@@ -40,10 +51,13 @@ class Character:
 
     def attack(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1 + 2*self.lvl) * self.arme)
+            target.take_damage(random.randint(0, self.force + 1) * self.arme)
     
-    def levelUp(self): #doesn't exists
+    def levelUp(self):
         self.lvl += 1
+        self.force += 2*self.baseForce
+        self.endurance += 2*self.baseEndurance
+        self.hp += 2*self.baseEndurance
         
         
 class Equipe:
@@ -56,46 +70,68 @@ class Equipe:
             return False
         else:
             return True
-    
-
 class Duel:
-    def __init__(self, equipe_1:Equipe, equipe_2:Equipe):
+    def __init__(self, equipe_1: Equipe, equipe_2: Equipe):
         self.equipe_1 = equipe_1
         self.equipe_2 = equipe_2
+
         self.perso_1 = equipe_1.perso_1
         self.perso_2 = equipe_1.perso_2
         self.perso_3 = equipe_2.perso_1
         self.perso_4 = equipe_2.perso_2
-        #self.startDuel()
-        
+
     def who_wins(self):
         if self.equipe_1.est_morte():
-            return 1
-        elif self.equipe_2.est_morte():
             return 2
+        elif self.equipe_2.est_morte():
+            return 1
         return False
-        
-    def hp_equipe(self, equipe:Equipe):
-        return equipe.perso_1.hp + equipe.perso_2.hp
-        
-    def attaque_equipe(self, equipe_attaque:Equipe, cible_1:Character, cible_2:Character):
-        equipe_attaque.perso_1.attack(cible_1)
-        equipe_attaque.perso_2.attack(cible_2)
-        
-    def startDuel(self):
-        firstTeam = random.randint(0,1)
-        while self.who_wins() == False:
-            firstPlayer = random.randint(0,1)
-            if firstTeam > 0:
-                if firstPlayer > 0:
-                    self.attaque_equipe(self.equipe_1, self.equipe_2.perso_1, self.equipe_2.perso_2)
-                else:
-                    self.attaque_equipe(self.equipe_1, self.equipe_2.perso_2, self.equipe_2.perso_1)
-            else:
-                if firstPlayer > 0:
-                    self.attaque_equipe(self.equipe_2, self.equipe_2.perso_1, self.equipe_2.perso_2)
-                else:
-                    self.attaque_equipe(self.equipe_2, self.equipe_2.perso_2, self.equipe_2.perso_1)    
-        return self.who_wins()
-        
 
+    def hp_equipe(self, equipe: Equipe):
+        return equipe.perso_1.hp + equipe.perso_2.hp
+
+    def choisir_cible(self, p1: Character, p2: Character):
+        cibles = [p for p in [p1, p2] if p.is_alive()]
+
+        if len(cibles) == 1:
+            return cibles[0]
+
+        scores = []
+        for p in cibles:
+            vuln_hp = 1 / (p.hp + 1)
+            vuln_chance = 1 / (p.chance + 1) 
+            scores.append(vuln_hp + vuln_chance)
+
+        total = sum(scores)
+        r = random.uniform(0, total)
+
+        cumul = 0
+        for i, p in enumerate(cibles):
+            cumul += scores[i]
+            if r <= cumul:
+                return p
+
+    def startDuel(self):
+        while not self.who_wins():
+            joueurs = [
+                p for p in
+                [self.perso_1, self.perso_2, self.perso_3, self.perso_4]
+                if p.is_alive()
+            ]
+
+            joueurs.sort(key=lambda x: x.agilite, reverse=True)
+
+            for attaquant in joueurs:
+                if not attaquant.is_alive():
+                    continue
+                if attaquant in [self.perso_1, self.perso_2]:
+                    cible = self.choisir_cible(self.perso_3, self.perso_4)
+                else:
+                    cible = self.choisir_cible(self.perso_1, self.perso_2)
+
+                attaquant.attack(cible)
+
+                if self.who_wins():
+                    return self.who_wins()
+
+        return self.who_wins()

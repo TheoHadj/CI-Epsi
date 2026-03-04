@@ -32,11 +32,11 @@ def _mutmut_trampoline(orig, mutants, call_args, call_kwargs, self_arg = None): 
     return result # type: ignore
 
 class Character:
-    def __init__(self, armor:int = 0,  arme_multiplicator:int=1):
-        args = [armor, arme_multiplicator]# type: ignore
+    def __init__(self, armor:int = 0,  arme:int=1):
+        args = [armor, arme]# type: ignore
         kwargs = {}# type: ignore
         return _mutmut_trampoline(object.__getattribute__(self, 'xǁCharacterǁ__init____mutmut_orig'), object.__getattribute__(self, 'xǁCharacterǁ__init____mutmut_mutants'), args, kwargs, self)
-    def xǁCharacterǁ__init____mutmut_orig(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_orig(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -55,9 +55,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_1(self, armor:int = 1,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_1(self, armor:int = 1,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -76,9 +76,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_2(self, armor:int = 0,  arme_multiplicator:int=2):
+    def xǁCharacterǁ__init____mutmut_2(self, armor:int = 0,  arme:int=2):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -97,9 +97,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_3(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_3(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -118,9 +118,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_4(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_4(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -139,9 +139,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_5(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_5(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -160,9 +160,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_6(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_6(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -181,9 +181,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_7(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_7(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -202,9 +202,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_8(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_8(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -223,9 +223,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_9(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_9(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -244,9 +244,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_10(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_10(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -265,9 +265,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_11(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_11(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -286,9 +286,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_12(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_12(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -307,9 +307,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_13(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_13(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -328,9 +328,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_14(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_14(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -349,9 +349,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_15(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_15(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -370,9 +370,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_16(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_16(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -391,9 +391,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_17(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_17(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -412,9 +412,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_18(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_18(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -433,9 +433,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_19(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_19(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -454,9 +454,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_20(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_20(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -475,9 +475,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_21(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_21(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -496,9 +496,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_22(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_22(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -517,9 +517,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_23(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_23(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -538,9 +538,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_24(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_24(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -559,9 +559,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_25(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_25(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -580,9 +580,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_26(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_26(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -601,9 +601,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_27(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_27(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -622,9 +622,9 @@ class Character:
 
         self.armor = None
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.arme = arme if arme > 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_28(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_28(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -643,9 +643,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = None
+        self.arme = None
         self.attack
-    def xǁCharacterǁ__init____mutmut_29(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_29(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -664,9 +664,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator >= 0 else 1
+        self.arme = arme if arme >= 0 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_30(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_30(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -685,9 +685,9 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 1 else 1
+        self.arme = arme if arme > 1 else 1
         self.attack
-    def xǁCharacterǁ__init____mutmut_31(self, armor:int = 0,  arme_multiplicator:int=1):
+    def xǁCharacterǁ__init____mutmut_31(self, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -706,7 +706,7 @@ class Character:
 
         self.armor = armor
         
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 2
+        self.arme = arme if arme > 0 else 2
         self.attack
     
     xǁCharacterǁ__init____mutmut_mutants : ClassVar[MutantDict] = { # type: ignore
@@ -744,25 +744,25 @@ class Character:
     }
     xǁCharacterǁ__init____mutmut_orig.__name__ = 'xǁCharacterǁ__init__'
     
-    def ajouter_arme(self, arme_multiplicator:int):
-        args = [arme_multiplicator]# type: ignore
+    def ajouter_arme(self, arme:int):
+        args = [arme]# type: ignore
         kwargs = {}# type: ignore
         return _mutmut_trampoline(object.__getattribute__(self, 'xǁCharacterǁajouter_arme__mutmut_orig'), object.__getattribute__(self, 'xǁCharacterǁajouter_arme__mutmut_mutants'), args, kwargs, self)
     
-    def xǁCharacterǁajouter_arme__mutmut_orig(self, arme_multiplicator:int):
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+    def xǁCharacterǁajouter_arme__mutmut_orig(self, arme:int):
+        self.arme = arme if arme > 0 else 1
     
-    def xǁCharacterǁajouter_arme__mutmut_1(self, arme_multiplicator:int):
-        self.arme_multiplicator = None
+    def xǁCharacterǁajouter_arme__mutmut_1(self, arme:int):
+        self.arme = None
     
-    def xǁCharacterǁajouter_arme__mutmut_2(self, arme_multiplicator:int):
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator >= 0 else 1
+    def xǁCharacterǁajouter_arme__mutmut_2(self, arme:int):
+        self.arme = arme if arme >= 0 else 1
     
-    def xǁCharacterǁajouter_arme__mutmut_3(self, arme_multiplicator:int):
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 1 else 1
+    def xǁCharacterǁajouter_arme__mutmut_3(self, arme:int):
+        self.arme = arme if arme > 1 else 1
     
-    def xǁCharacterǁajouter_arme__mutmut_4(self, arme_multiplicator:int):
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 2
+    def xǁCharacterǁajouter_arme__mutmut_4(self, arme:int):
+        self.arme = arme if arme > 0 else 2
     
     xǁCharacterǁajouter_arme__mutmut_mutants : ClassVar[MutantDict] = { # type: ignore
     'xǁCharacterǁajouter_arme__mutmut_1': xǁCharacterǁajouter_arme__mutmut_1, 
@@ -1301,7 +1301,7 @@ class Character:
 
     def xǁCharacterǁattack__mutmut_orig(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, self.force + 1) * self.arme)
 
     def xǁCharacterǁattack__mutmut_1(self, target):
         if self.is_alive():
@@ -1309,35 +1309,35 @@ class Character:
 
     def xǁCharacterǁattack__mutmut_2(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1) / self.arme_multiplicator)
+            target.take_damage(random.randint(0, self.force + 1) / self.arme)
 
     def xǁCharacterǁattack__mutmut_3(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(None, self.force + 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(None, self.force + 1) * self.arme)
 
     def xǁCharacterǁattack__mutmut_4(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, None) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, None) * self.arme)
 
     def xǁCharacterǁattack__mutmut_5(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(self.force + 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(self.force + 1) * self.arme)
 
     def xǁCharacterǁattack__mutmut_6(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, ) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, ) * self.arme)
 
     def xǁCharacterǁattack__mutmut_7(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(1, self.force + 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(1, self.force + 1) * self.arme)
 
     def xǁCharacterǁattack__mutmut_8(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force - 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, self.force - 1) * self.arme)
 
     def xǁCharacterǁattack__mutmut_9(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 2) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, self.force + 2) * self.arme)
     
     xǁCharacterǁattack__mutmut_mutants : ClassVar[MutantDict] = { # type: ignore
     'xǁCharacterǁattack__mutmut_1': xǁCharacterǁattack__mutmut_1, 

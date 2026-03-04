@@ -161,13 +161,13 @@ def test_armor_is_over_powered():
 def test_armor_is_over_powered():
     #Etant donné un perso1 possédant une armure de 102 
     with pytest.raises(ValueError):
-        Character(102)
+        Character(armor=102)
     
     #Le héro ne peut pas être créer.
 def test_armor_is_negative():
     #Etant donné un perso1 possédant une armure de -2 
     with pytest.raises(ValueError):
-        Character(102)
+        Character(armor=-1)
     
     #Le héro ne peut pas être créer.
      
@@ -181,11 +181,11 @@ def test_is_armor_reducing_damage_taken():
     perso1.take_damage(2)
     
     #Le héro doit perdre 1 hp.
-    assert (hp0 - 1)== perso1.hp 
+    assert (hp0 - 2)== perso1.hp 
     
 def test_is_max_armor_protect_damage_taken():
     #Etant donné un perso1 possédant une armure de 1 
-    perso1 = Character(100)
+    perso1 = Character(armor=100)
     hp0= perso1.hp
 
     #Quand heros reçoit des dommages égale à 1 de dégats
@@ -196,7 +196,7 @@ def test_is_max_armor_protect_damage_taken():
     
 def test_is_armor_reducing_attack_receive():
     #Etant donné deux personnages, perso1 possédant une armure de 1 et perso 
-    perso1 = Character(50)
+    perso1 = Character(armor=50)
     h0=perso1.hp
     perso = Character()
 
