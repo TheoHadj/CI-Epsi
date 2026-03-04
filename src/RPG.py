@@ -1,3 +1,6 @@
+import random
+
+
 class Character:
     def __init__(self):
         # self.name = name
@@ -20,6 +23,7 @@ class Character:
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
             amount = int(amount) + self.force
+            amount = random.randint(0, amount)
             self.hp -= amount
             if self.hp < 0:
                 self.hp = 0
