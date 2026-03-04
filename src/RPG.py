@@ -50,9 +50,12 @@ class Character:
                     self.hp = 0
 
     def attack(self, target):
-        if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1) * self.arme)
-    
+        if self.is_alive() and target.is_alive():
+            before_hp = target.hp
+            target.take_damage(random.randint(0, self.force + 1 + 2*self.lvl) * self.arme)
+            if before_hp > 0 and not target.is_alive():
+                self.levelUp()
+                
     def levelUp(self):
         self.lvl += 1
         self.hp += 2

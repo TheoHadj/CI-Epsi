@@ -73,7 +73,7 @@ def test_dead_player_cant_attack():
         perso1.attack(perso2)
 
     #ALORS perso NE FAIT PAS DE DEGAT A perso1.
-    assert perso1.hp==heroHp0
+    assert perso1.hp==heroHp0+2 or perso1.hp==heroHp0+2+1
 
 def test_valid_take_damage_argument():
     # Etant donné un personnage
