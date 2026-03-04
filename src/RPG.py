@@ -1,8 +1,9 @@
 import random
+import __future__
 
 class Character:
-    def __init__(self, armor =0,  arme_multiplicator:int=1):
-        # self.name = name
+    def __init__(self, name ="Unnamed", armor =0,  arme_multiplicator:int=1):
+        self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
         if not (0 <= armor <= 100):
@@ -51,3 +52,25 @@ class Character:
         self.force += 2*self.baseForce
         self.endurance += 2*self.baseEndurance
         self.hp += 2*self.baseEndurance
+
+    
+def duel(self, ally: "Character", target: "Character", target1: "Character"):
+        print("LE DUEL COMMENCE !")
+        
+        while (self.is_alive() or ally.is_alive()) and (target.is_alive() or target1.is_alive()):
+            for attaquant in [self, ally, target, target1]:
+                if attaquant.is_alive():
+                    print(f"\nC'est au tour de {attaquant} (LVL {attaquant.lvl})")
+                    
+                    choix = ""
+                    while choix not in ["1", "2","3","4"]:
+                        choix = input(f"Qui attaquer ? () : ")
+                    
+                    cible = target if choix == "1" else target1
+                    
+                    if cible.is_alive():
+                        attaquant.attack(cible)
+                    else:
+                        print("Cette cible est déjà KO ! Vous passez votre tour.")
+
+        print("\n--- FIN DU COMBAT ---")
