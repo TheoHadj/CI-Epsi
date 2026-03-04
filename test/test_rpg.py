@@ -167,7 +167,7 @@ def test_armor_is_over_powered():
 def test_armor_is_negative():
     #Etant donné un hero possédant une armure de -2 
     with pytest.raises(ValueError):
-        Character(102)
+        Character(-2)
     
     #Le héro ne peut pas être créer.
      
