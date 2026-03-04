@@ -5,12 +5,14 @@ class Character:
         self.hp = 10
         # self.attack_power = attack_power
         self.attack_power = 1
+        self.force = 0
         
     def is_alive(self):
         return self.hp > 0
 
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
+            amount = int(amount) + self.force
             self.hp -= amount
             if self.hp < 0:
                 self.hp = 0

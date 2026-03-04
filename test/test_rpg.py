@@ -89,3 +89,19 @@ def test_valid_take_damage_argument():
     
     hero.take_damage(hero)
     assert hero.hp == hero_base_hp
+
+
+def test_caracteristique_force():
+    # Étant donné un personnage
+    perso = Character()
+    ennemi = Character()
+
+    perso_force = perso.force
+    perso_base_hp = perso.hp
+    
+    # Il possède une caractéristique Force qui augmente ses dégats
+    assert perso_force >= 0
+    
+    # Ses dégats sont augmentés en fonction de sa force (1 + force)
+    ennemi.attack(perso)
+    assert perso.hp < perso_base_hp
