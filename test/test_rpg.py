@@ -89,3 +89,20 @@ def test_valid_take_damage_argument():
     
     hero.take_damage(hero)
     assert hero.hp == hero_base_hp
+
+
+def test_has_endu():
+    #Etant donné un personnage
+    hero = Character()
+    
+    #Quand il vient d'être créé
+
+    #Alors il a 1 d'endurance
+    assert hero.endurance == 1
+
+def test_end_impact_hp():
+    #Etant donné un personnage
+    hero = Character()
+
+    #Alors ces hp sont égaux à baseHp + son endurance
+    assert hero.hp == hero.baseHp + hero.endurance 
