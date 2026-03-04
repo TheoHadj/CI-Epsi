@@ -86,7 +86,7 @@ class Duel:
     def fight(self):
 
         while(self.equipe1.isAlive==False or self.equipe2.isAlive==False):
-            order = self.getOrder()
+            order= self.getOrder()
             for p in order:
                 p.attack(self.get_enemy_team(p).whoLowest())
        
@@ -109,6 +109,9 @@ class Duel:
         p4 = eq_adverse.perso_2 if p2 == eq_adverse.perso_1 else eq_adverse.perso_1
 
         return [p1, p2, p3, p4]
+    
+    def get_enemy_team(self, character):
+        return self.equipe2 if character in (self.equipe1.perso1, self.equipe1.perso2) else self.equipe1
     
     def get_enemy_team(self, character):
         return self.equipe2 if character in (self.equipe1.perso1, self.equipe1.perso2) else self.equipe1
