@@ -36,16 +36,11 @@ class Character:
                 amount = round(amount-0.1)
             else:
                 amount=round(amount)
-            
+                            
             if(amount>0):
                 self.hp -= amount
                 if self.hp < 0:
                     self.hp = 0
-            amount = int(amount)
-            self.hp -= amount
-            self.hp = round(self.hp)
-            if self.hp < 0:
-                self.hp = 0
 
     def attack(self, target):
         if self.is_alive():
