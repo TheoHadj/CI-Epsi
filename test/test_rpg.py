@@ -170,7 +170,7 @@ def test_is_armor_reducing_attack_receive():
     #Quand heros reçoit une attaque de monstre qui a 0 de force et qui fera entre 0 et 1 de dégats
     monstre.attack(hero)
     
-    #Le héro la vie de hero ne doit pas changer.
+    #La vie du hero ne doit pas changer.
 
     assert hero.hp == h0 
     
@@ -182,5 +182,5 @@ def test_armor_is_reducing_more_than_received():
     #Quand heros reçoit des dommages égale à 1 de dégats
     hero.take_damage(1)
     
-    #Le héro la vie de hero ne doit pas changer.
+    #La vie du hero ne doit pas changer.
     assert hp0 == hero.hp 
