@@ -217,3 +217,4 @@ def test_armor_is_reducing_more_than_received():
     
     #La vie du perso1 ne doit pas changer.
     assert hp0 == perso1.hp 
+    

@@ -63,9 +63,10 @@ class Duel:
         self.equipe_1 = equipe_1
         self.equipe_2 = equipe_2
         self.perso_1 = equipe_1.perso_1
-        self.perso_2= equipe_1.perso_2
+        self.perso_2 = equipe_1.perso_2
         self.perso_3 = equipe_2.perso_1
         self.perso_4 = equipe_2.perso_2
+        #self.startDuel()
         
     def who_wins(self):
         if self.equipe_1.est_morte():
@@ -80,3 +81,21 @@ class Duel:
     def attaque_equipe(self, equipe_attaque:Equipe, cible_1:Character, cible_2:Character):
         equipe_attaque.perso_1.attack(cible_1)
         equipe_attaque.perso_2.attack(cible_2)
+        
+    def startDuel(self):
+        firstTeam = random.randint(0,1)
+        while self.who_wins() == False:
+            firstPlayer = random.randint(0,1)
+            if firstTeam > 0:
+                if firstPlayer > 0:
+                    self.attaque_equipe(self.equipe_1, self.equipe_2.perso_1, self.equipe_2.perso_2)
+                else:
+                    self.attaque_equipe(self.equipe_1, self.equipe_2.perso_2, self.equipe_2.perso_1)
+            else:
+                if firstPlayer > 0:
+                    self.attaque_equipe(self.equipe_2, self.equipe_2.perso_1, self.equipe_2.perso_2)
+                else:
+                    self.attaque_equipe(self.equipe_2, self.equipe_2.perso_2, self.equipe_2.perso_1)    
+        return self.who_wins()
+        
+
