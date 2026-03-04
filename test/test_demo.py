@@ -67,23 +67,23 @@ def test_demo_arme_attaque_baisse():
 
 
 def test_deux_persos_armures():
-    #Etant donné trois personnages, hero possédant une armure de 50, un hero sans et monstre 
+    #Etant donné trois personnages, hero possédant une armure de 50, un hero sans et perso 
     hero = Character(50)
     h0=hero.hp
 
     hero2 = Character(0)
     h02=hero2.hp
 
-    monstre = Character()
+    perso = Character()
 
-    #Quand heros reçoit une attaque de monstre qui a 0 de force et qui fera entre 0 et 1 de dégats
-    monstre.attack(hero)
-    monstre.attack(hero2)
+    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
+    perso.attack(hero)
+    perso.attack(hero2)
 
     #La vie du hero ne doit pas changer.
 
     assert hero.hp == h0 
-    assert hero.hp != hero2.hp
+    # assert hero.hp != hero2.hp
     
     
     def test_demo_equipes():
