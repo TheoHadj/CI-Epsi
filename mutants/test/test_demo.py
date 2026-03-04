@@ -1,4 +1,4 @@
-from src.RPG import Character, Equipe, Duel
+from RPG import Character, Equipe, Duel
 
 def test_demo_arme():
     # étant donné un personnage
@@ -51,13 +51,13 @@ def test_demo_arme_attaque_hausse():
 
     
 def test_demo_arme_attaque_baisse():
-    # Étant donné un personnage ayant une arme et un autre personnage
+    # Étant donné un personnage ayant une arme et un perso_2
     perso_arme = Character(0, 0.5)
     perso_sans_arme = Character()
     perso_2 = Character()
     ennemi2 = Character()
         
-    # Lorsque le personnage armé attaque le second personnage
+    # Lorsque le personnage armé attaque l'perso_2
     perso_arme.attack(perso_2)
     perso_sans_arme.attack(ennemi2)
 
@@ -82,7 +82,7 @@ def test_deux_persos_armures():
 
     #La vie du perso1 ne doit pas changer.
 
-    assert perso1.hp <= h0 and perso1.hp >=9
+    assert perso1.hp == h0 
     # assert perso1.hp != perso2.hp
     
     
@@ -141,7 +141,7 @@ def test_deux_persos_armures():
     
     
     def test_demo_duel_gagne():
-        # Étant donné un duel
+        # Étant un duel
         eq1_p1 = Character(2, 1.5)
         eq1_p2 = Character(0, 0.9)
         eq2_p1 = Character(0, 1.1)
@@ -150,5 +150,30 @@ def test_deux_persos_armures():
         equipe_2 = Equipe(eq2_p1, eq2_p2)
         duel = Duel(equipe_1, equipe_2)
         
+        # Lorsqu'une équipe attaque l'autre plusieurs fois
+        while not equipe_2.est_morte:   
+            duel.attaque_equipe(equipe_1, equipe_2.perso_2, equipe_2.perso_1)
+        
+        # Alors l'équipe attaquante gagne le duel
+        assert duel.who_wins() == 1
+            
         
         
+    
+        
+        
+        
+        
+        
+        
+
+        
+
+        
+        
+
+    
+
+    
+    
+    

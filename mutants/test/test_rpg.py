@@ -1,4 +1,5 @@
-from src.RPG import Character
+from RPG import Character
+import pytest
 
 def test_player_initialization():
     #ETANT DONNE UN PERSONNAGE
@@ -8,114 +9,211 @@ def test_player_initialization():
     assert p.hp == 10 + p.endurance
 
 def test_attack_reduces_hp():
-    # ETANT DONNE deux personnages un monstre et un hero avec 10 PV
-    hero = Character()
-    monster = Character()
-    hp0 = monster.hp
+    # ETANT DONNE deux personnages un perso et un perso1 avec 10 PV
+    perso1 = Character()
+    perso2 = Character()
+    hp0 = perso2.hp
 
-    #QUAND LE HERO ATTAQUE LE MONSTRE
-    hero.attack(monster)
+    #QUAND LE perso1 ATTAQUE LE perso
+    perso1.attack(perso2)
 
-    #LE MONSTRE doit perdre entre 0 et 1 hp + la force du hero
-    assert hp0 - monster.hp >= 0
-    assert hero.force > 0 and hero.force <= 2 * hero.lvl
+    #LE perso doit perdre entre 0 et 1 hp + la force du perso1
+    assert hp0 - perso2.hp >= 0
+    assert perso1.force >= 0 and perso1.force <= 2 * perso1.lvl
 
 def test_player_death():
     #ETANT DONNE UN PERSONNAGE
-    monster = Character()
+    perso2 = Character()
 
     #QUAND IL PREND ASSEZ DE COUPS
-    while(monster.hp>0) :
-        monster.take_damage(1)
+    while(perso2.hp>0) :
+        perso2.take_damage(1)
     
     #IL DOIT avoir 0 hp et ne plus être en vie
-    assert monster.hp == 0
-    assert monster.is_alive() is False
+    assert perso2.hp == 0
+    assert perso2.is_alive() is False
 
 def test_player_kill():
-    #ETANT DONNE DEUX PERSONNAGES monstre et hero
-    hero = Character()
-    monster = Character()
+    #ETANT DONNE DEUX PERSONNAGES perso et perso1
+    perso1 = Character()
+    perso2 = Character()
 
-    #QUAND MONSTRE TUE LE HERO
-    while(hero.hp>0) :
-        monster.attack(hero)
+    #QUAND perso TAPE perso1 JUSQU'A 0 HP
+    while(perso1.hp>0) :
+        perso2.attack(perso1)
     
-    #Hero doit mourir et avoir 0 hp
-    assert hero.hp == 0
-    assert hero.is_alive() is False
+    #perso1 doit mourir et avoir 0 hp
+    assert perso1.hp == 0
+    assert perso1.is_alive() is False
 
 def test_player_over_damage():
-    #ETANT DONNE DEUX PERSONNAGES monstre et hero
-    hero = Character()
-    monster = Character()
+    #ETANT DONNE DEUX PERSONNAGES perso et perso1
+    perso1 = Character()
+    perso2 = Character()
 
-    #QUAND MONSTRE TAPE ASSEZ LE HERO POUR QU'IL MEURT, PUIS TAPE DEUX FOIS DE PLUS 
-    while(hero.hp>0):
-        monster.attack(hero)
+    #QUAND perso TAPE ASSEZ LE perso1 POUR QU'IL MEURT, PUIS TAPE DEUX FOIS DE PLUS 
+    while(perso1.hp>0):
+        perso2.attack(perso1)
     
     for i in range (2):
-        monster.attack(hero)
+        perso2.attack(perso1)
         
-    #Hero doit mourir et ne pas perdre plus d'hp que 0
-    assert hero.hp == 0
-    assert hero.is_alive() is False
+    #perso1 doit mourir et ne pas perdre plus d'hp que 0
+    assert perso1.hp == 0
+    assert perso1.is_alive() is False
  
 def test_dead_player_cant_attack():
-    #ETANT DONNE DEUX PERSONNAGES monstre et hero 
-    hero = Character()
-    heroHp0=hero.hp
-    monster = Character()
+    #ETANT DONNE DEUX PERSONNAGES perso et perso1 
+    perso1 = Character()
+    heroHp0=perso1.hp
+    perso2 = Character()
 
-    #QUAND MONSTRE EST MORT ET QU'IL ATTAQUE
-    while(monster.hp>0):
-        hero.attack(monster)
+    #QUAND perso EST MORT ET QU'IL ATTAQUE
+    while(perso2.hp>0):
+        perso1.attack(perso2)
 
-    #ALORS MONSTRE NE FAIT PAS DE DEGAT A HERO.
-    assert hero.hp==heroHp0
+    #ALORS perso NE FAIT PAS DE DEGAT A perso1.
+    assert perso1.hp==heroHp0
 
 def test_valid_take_damage_argument():
     # Etant donné un personnage
-    hero = Character()
-    hero_base_hp = hero.hp
+    perso1 = Character()
+    hero_base_hp = perso1.hp
     
     # Lorsqu'un personnage subit des dégats, et que la valeur des dégats subits n'est pas un nombre supérieur à 0
-    hero.take_damage(-1)
+    perso1.take_damage(-1)
     
-    # Alors le monstre ne doit pas perdre points de vie
-    assert hero.hp == hero_base_hp
+    # Alors le perso ne doit pas perdre points de vie
+    assert perso1.hp == hero_base_hp
 
-    hero.take_damage("1")
-    assert hero.hp == hero_base_hp
+    perso1.take_damage("1")
+    assert perso1.hp == hero_base_hp
     
-    hero.take_damage(hero)
-    assert hero.hp == hero_base_hp
+    perso1.take_damage(perso1)
+    assert perso1.hp == hero_base_hp
 
 def test_has_endu():
     #Etant donné un personnage
-    hero = Character()
+    perso1 = Character()
     
+    baseEnd= perso1.endurance
     #Quand il vient d'être créé
+    #Alors il a 0 d'endurance
+    assert perso1.endurance == 0
 
-    #Alors il a 1 d'endurance
-    assert hero.endurance == 2
+
+    #Quand il gagne un niveau
+    perso1.levelUp()
+    #Alors il gagne 2 d'endurance
+    assert perso1.endurance == 2
+    assert (baseEnd + 2) == 2
 
 def test_end_impact_hp():
     #Etant donné un personnage
-    hero = Character()
+    perso1 = Character()
 
     #Alors ces hp sont égaux à baseHp + son endurance
-    assert hero.hp == hero.baseHp + hero.endurance 
+    assert perso1.hp == perso1.baseHp + perso1.endurance 
     
+def test_levelUp():
+    #Etant donné un personnage
+    perso1 = Character()
+    
+    damage0= perso1.force
+    hp0= perso1.hp
+
+    #Quand il gagne un niveau
+    perso1.levelUp()
+
+    #Alors ses dégats et ses hp augmente de deux
+    assert perso1.force == damage0+2
+    assert perso1.hp == hp0+2
+
+    #Quand il gagne un autre niveau
+    perso1.levelUp()
+
+    #Alors ses dégats et ses hp augmente de quatre (2*lvl)
+    assert perso1.force == damage0+4
+    assert perso1.hp == hp0+4
+     
+
+
 def test_caracteristique_force():
     # Étant donné un personnage
     perso = Character()
-    ennemi = Character()
+    perso_2 = Character()
 
     perso_force = perso.force
     perso_base_hp = perso.hp
     
     # Il possède une caractéristique Force qui augmente ses dégats
     assert perso_force >= 0
-    ennemi.attack(perso)
+    perso_2.attack(perso)
     assert perso.hp <= perso_base_hp
+
+def test_armor_is_over_powered():
+    #Etant donné un perso1 possédant une armure de 102 
+    perso1 = Character(102)
+    
+    #Le héro ne peut pas être créer.
+    assert perso1 == False 
+
+def test_armor_is_over_powered():
+    #Etant donné un perso1 possédant une armure de 102 
+    with pytest.raises(ValueError):
+        Character(102)
+    
+    #Le héro ne peut pas être créer.
+def test_armor_is_negative():
+    #Etant donné un perso1 possédant une armure de -2 
+    with pytest.raises(ValueError):
+        Character(-2)
+    
+    #Le héro ne peut pas être créer.
+     
+
+def test_is_armor_reducing_damage_taken():
+    #Etant donné un perso1 possédant une armure de 50 
+    perso1 = Character(50)
+    hp0= perso1.hp
+
+    #Quand heros reçoit des dommages égale à 2 de dégats
+    perso1.take_damage(2)
+    
+    #Le héro doit perdre 1 hp.
+    assert (hp0 - 1)== perso1.hp 
+    
+def test_is_max_armor_protect_damage_taken():
+    #Etant donné un perso1 possédant une armure de 1 
+    perso1 = Character(100)
+    hp0= perso1.hp
+
+    #Quand heros reçoit des dommages égale à 1 de dégats
+    perso1.take_damage(1)
+    
+    #Le héro la vie de perso1 ne doit pas changer.
+    assert hp0 == perso1.hp 
+    
+def test_is_armor_reducing_attack_receive():
+    #Etant donné deux personnages, perso1 possédant une armure de 1 et perso 
+    perso1 = Character(50)
+    h0=perso1.hp
+    perso = Character()
+
+    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
+    perso.attack(perso1)
+    
+    #La vie du perso1 ne doit pas changer.
+
+    assert perso1.hp == h0 
+    
+def test_armor_is_reducing_more_than_received():
+    #Etant donné un perso1 possédant une armure de 3 
+    perso1 = Character(100)
+    hp0= perso1.hp
+
+    #Quand heros reçoit des dommages égale à 1 de dégats
+    perso1.take_damage(0)
+    
+    #La vie du perso1 ne doit pas changer.
+    assert hp0 == perso1.hp 
