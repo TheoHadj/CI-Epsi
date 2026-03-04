@@ -92,22 +92,6 @@ def test_valid_take_damage_argument():
     perso1.take_damage(perso1)
     assert perso1.hp == hero_base_hp
 
-def test_has_endu():
-    #Etant donné un personnage
-    perso1 = Character()
-    
-    baseEnd= perso1.endurance
-    #Quand il vient d'être créé
-    #Alors il a 0 d'endurance
-    assert perso1.endurance == 0
-
-
-    #Quand il gagne un niveau
-    perso1.levelUp()
-    #Alors il gagne 2 d'endurance
-    assert perso1.endurance == 2
-    assert (baseEnd + 2) == 2
-
 def test_end_impact_hp():
     #Etant donné un personnage
     perso1 = Character()
@@ -119,22 +103,24 @@ def test_levelUp():
     #Etant donné un personnage
     perso1 = Character()
     
-    damage0= perso1.force
+    force0= perso1.force
     hp0= perso1.hp
+    chance0 = perso1.chance
+    agi0 = perso1.agilite
+
 
     #Quand il gagne un niveau
     perso1.levelUp()
 
-    #Alors ses dégats et ses hp augmente de deux
-    assert perso1.force == damage0+2
-    assert perso1.hp == hp0+2
+    #Alors ses hp augmente de deux
+    assert perso1.hp == hp0+2 or perso1.hp == hp0+2+1
 
     #Quand il gagne un autre niveau
     perso1.levelUp()
 
     #Alors ses dégats et ses hp augmente de quatre (2*lvl)
-    assert perso1.force == damage0+4
-    assert perso1.hp == hp0+4
+    assert perso1.force == force0+1 or perso1.force == force0 or perso1.force == force0 +1 +1
+    assert perso1.hp == hp0+4 or perso1.hp == hp0+4+1 or perso1.hp == hp0+4+1+1
      
 
 

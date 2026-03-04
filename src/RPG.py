@@ -55,10 +55,20 @@ class Character:
     
     def levelUp(self):
         self.lvl += 1
-        self.force += 2*self.baseForce
-        self.endurance += 2*self.baseEndurance
-        self.hp += 2*self.baseEndurance
+        self.hp += 2
+
+        stat = random.choice(["force", "endurance", "agilite", "chance"])
         
+        if stat == "force":
+            self.force += 1
+        elif stat == "endurance":
+            self.endurance += 1
+            self.hp += 1
+        elif stat == "agilite":
+            self.agilite += 1
+        elif stat == "chance":
+            self.chance += 1
+            
         
 class Equipe:
     def __init__(self, perso_1:Character, perso_2:Character):
