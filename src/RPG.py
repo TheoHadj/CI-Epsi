@@ -2,10 +2,15 @@ class Character:
     def __init__(self):
         # self.name = name
         # self.hp = hp
-        self.baseHp = 10
         # self.attack_power = attack_power
-        self.attack_power = 1
-        self.endurance = 1
+        self.baseAttack_power = 1
+        self.baseEndurance = 1
+        self.baseHp = 10
+       
+        self.lvl = 0
+
+        self.attack_power = 2*self.baseAttack_power* self.lvl
+        self.endurance = 2*self.baseEndurance * self.lvl
         self.hp = self.baseHp + self.endurance
         
     def is_alive(self):

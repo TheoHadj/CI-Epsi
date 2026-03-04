@@ -106,3 +106,5 @@ def test_end_impact_hp():
 
     #Alors ces hp sont égaux à baseHp + son endurance
     assert hero.hp == hero.baseHp + hero.endurance 
+
+# def test_end_impact_hp()
