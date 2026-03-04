@@ -30,6 +30,7 @@ class Character:
         if isinstance(amount, (int, float)) and amount > 0:
             amount = int(amount)
             self.hp -= amount
+            self.hp = round(self.hp)
             if self.hp < 0:
                 self.hp = 0
 
