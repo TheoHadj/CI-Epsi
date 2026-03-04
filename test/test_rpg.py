@@ -18,6 +18,7 @@ def test_attack_reduces_hp():
 
     #LE MONSTRE doit perdre entre 0 et 1 hp + la force du hero
     assert hp0 - monster.hp >= 0
+    assert hero.force > 0 and hero.force <= 2 * hero.lvl
 
 def test_player_death():
     #ETANT DONNE UN PERSONNAGE
