@@ -173,14 +173,14 @@ def test_armor_is_negative():
      
 
 def test_is_armor_reducing_damage_taken():
-    #Etant donné un hero possédant une armure de 1 
+    #Etant donné un hero possédant une armure de 50 
     hero = Character(50)
     hp0= hero.hp
 
-    #Quand heros reçoit des dommages égale à 1 de dégats
+    #Quand heros reçoit des dommages égale à 2 de dégats
     hero.take_damage(2)
     
-    #Le héro la vie de hero ne doit pas changer.
+    #Le héro doit perdre 1 hp.
     assert (hp0 - 1)== hero.hp 
     
 def test_is_max_armor_protect_damage_taken():

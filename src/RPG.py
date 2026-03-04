@@ -1,7 +1,7 @@
 import random
 
 class Character:
-    def __init__(self, armor =0):
+    def __init__(self, armor =0,  arme_multiplicator:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -20,12 +20,18 @@ class Character:
 
         self.armor = armor
         
+        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+        self.attack
+    
+    def ajouter_arme(self, arme_multiplicator:int):
+        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+                
     def is_alive(self):
         return self.hp > 0
 
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
-            amount = int(amount)* 1 - (self.armor/100)
+            amount = amount * (1 - (self.armor/100))
             if(amount%1 ==0.5):
                 amount = round(amount-0.1)
             else:
@@ -35,11 +41,15 @@ class Character:
                 self.hp -= amount
                 if self.hp < 0:
                     self.hp = 0
+            amount = int(amount)
+            self.hp -= amount
+            self.hp = round(self.hp)
+            if self.hp < 0:
+                self.hp = 0
 
     def attack(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1))
-    
+            target.take_damage(random.randint(0, self.force + 1) * self.arme_multiplicator)
     
     def levelUp(self):
         self.lvl += 1
