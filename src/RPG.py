@@ -1,7 +1,4 @@
 import random
-from typing import Literal
-
-
 class Character:
     
     def __init__(self, arme_multiplicator:int=1):
