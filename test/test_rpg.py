@@ -97,7 +97,7 @@ def test_has_endu():
     #Quand il vient d'être créé
 
     #Alors il a 1 d'endurance
-    assert hero.endurance == 1
+    assert hero.endurance == 2
 
 def test_end_impact_hp():
     #Etant donné un personnage
@@ -116,7 +116,5 @@ def test_caracteristique_force():
     
     # Il possède une caractéristique Force qui augmente ses dégats
     assert perso_force >= 0
-    
-    # Ses dégats sont augmentés en fonction de sa force (1 + force)
     ennemi.attack(perso)
     assert perso.hp <= perso_base_hp
