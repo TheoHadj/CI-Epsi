@@ -5,7 +5,7 @@ def test_player_initialization():
     p = Character()
 
     #doit avec hp==10
-    assert p.hp == 10
+    assert p.hp == 10 + p.endurance
 
 def test_attack_reduces_hp():
     # ETANT DONNE deux personnages un monstre et un hero avec 10 PV
@@ -89,3 +89,34 @@ def test_valid_take_damage_argument():
     
     hero.take_damage(hero)
     assert hero.hp == hero_base_hp
+
+def test_has_endu():
+    #Etant donné un personnage
+    hero = Character()
+    
+    #Quand il vient d'être créé
+
+    #Alors il a 1 d'endurance
+    assert hero.endurance == 1
+
+def test_end_impact_hp():
+    #Etant donné un personnage
+    hero = Character()
+
+    #Alors ces hp sont égaux à baseHp + son endurance
+    assert hero.hp == hero.baseHp + hero.endurance 
+    
+def test_caracteristique_force():
+    # Étant donné un personnage
+    perso = Character()
+    ennemi = Character()
+
+    perso_force = perso.force
+    perso_base_hp = perso.hp
+    
+    # Il possède une caractéristique Force qui augmente ses dégats
+    assert perso_force >= 0
+    
+    # Ses dégats sont augmentés en fonction de sa force (1 + force)
+    ennemi.attack(perso)
+    assert perso.hp < perso_base_hp
