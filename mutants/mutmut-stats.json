@@ -1,0 +1,54 @@
+{
+    "tests_by_mangled_function_name": {
+        "RPG.x\u01c1Character\u01c1__init__": [
+            "test/test_rpg.py::test_caracteristique_force",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_player_over_damage",
+            "test/test_rpg.py::test_valid_take_damage_argument",
+            "test/test_rpg.py::test_player_death",
+            "test/test_rpg.py::test_dead_player_cant_attack",
+            "test/test_rpg.py::test_player_initialization",
+            "test/test_rpg.py::test_end_impact_hp",
+            "test/test_rpg.py::test_has_endu"
+        ],
+        "RPG.x\u01c1Character\u01c1take_damage": [
+            "test/test_rpg.py::test_caracteristique_force",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_player_over_damage",
+            "test/test_rpg.py::test_valid_take_damage_argument",
+            "test/test_rpg.py::test_player_death",
+            "test/test_rpg.py::test_dead_player_cant_attack"
+        ],
+        "RPG.x\u01c1Character\u01c1attack": [
+            "test/test_rpg.py::test_caracteristique_force",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_player_over_damage",
+            "test/test_rpg.py::test_dead_player_cant_attack"
+        ],
+        "RPG.x\u01c1Character\u01c1is_alive": [
+            "test/test_rpg.py::test_caracteristique_force",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_player_over_damage",
+            "test/test_rpg.py::test_player_death",
+            "test/test_rpg.py::test_dead_player_cant_attack"
+        ]
+    },
+    "duration_by_test": {
+        "test/test_rpg.py::test_player_initialization": 0.0003405000170459971,
+        "test/test_rpg.py::test_attack_reduces_hp": 0.0002512499922886491,
+        "test/test_rpg.py::test_player_death": 0.000251375007792376,
+        "test/test_rpg.py::test_player_kill": 0.0005758329934906214,
+        "test/test_rpg.py::test_player_over_damage": 0.0002707919920794666,
+        "test/test_rpg.py::test_dead_player_cant_attack": 0.0002682490012375638,
+        "test/test_rpg.py::test_valid_take_damage_argument": 0.0001911670115077868,
+        "test/test_rpg.py::test_has_endu": 0.0001897509937407449,
+        "test/test_rpg.py::test_end_impact_hp": 0.0001720830041449517,
+        "test/test_rpg.py::test_caracteristique_force": 0.00019458399037830532,
+        "test/test_true.py::test_true": 0.0001778750156518072
+    },
+    "stats_time": 0.15376299999999998
+}
