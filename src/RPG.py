@@ -112,19 +112,36 @@ class Duel:
                 return p
 
     def startDuel(self):
+
         while not self.who_wins():
-            joueurs = [
-                p for p in
-                [self.perso_1, self.perso_2, self.perso_3, self.perso_4]
-                if p.is_alive()
+
+            # Tri agilité
+            equipe1_joueurs = sorted(
+                [self.perso_1, self.perso_2],
+                key=lambda x: x.agilite,
+                reverse=True
+            )
+
+            equipe2_joueurs = sorted(
+                [self.perso_3, self.perso_4],
+                key=lambda x: x.agilite,
+                reverse=True
+            )
+
+            ordre = [
+                equipe1_joueurs[0],
+                equipe2_joueurs[0],
+                equipe1_joueurs[1],
+                equipe2_joueurs[1]
             ]
 
-            joueurs.sort(key=lambda x: x.agilite, reverse=True)
+            for attaquant in ordre:
 
-            for attaquant in joueurs:
                 if not attaquant.is_alive():
                     continue
-                if attaquant in [self.perso_1, self.perso_2]:
+
+                # Détermination des cibles
+                if attaquant in equipe1_joueurs:
                     cible = self.choisir_cible(self.perso_3, self.perso_4)
                 else:
                     cible = self.choisir_cible(self.perso_1, self.perso_2)
