@@ -1,8 +1,7 @@
 import random
 
-
 class Character:
-    def __init__(self):
+    def __init__(self, armor =0):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -16,17 +15,18 @@ class Character:
         self.endurance = 0
         self.hp = 10
 
-        self.attack
+        self.armor = armor
         
     def is_alive(self):
         return self.hp > 0
 
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
-            amount = int(amount)
-            self.hp -= amount
-            if self.hp < 0:
-                self.hp = 0
+            amount = int(amount) - self.armor
+            if(amount>0):
+                self.hp -= amount
+                if self.hp < 0:
+                    self.hp = 0
 
     def attack(self, target):
         if self.is_alive():

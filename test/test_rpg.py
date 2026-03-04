@@ -149,3 +149,38 @@ def test_caracteristique_force():
     assert perso_force >= 0
     ennemi.attack(perso)
     assert perso.hp <= perso_base_hp
+
+def test_is_armor_reducing_damage_taken():
+    #Etant donné un hero possédant une armure de 1 
+    hero = Character(1)
+    hp0= hero.hp
+
+    #Quand heros reçoit des dommages égale à 1 de dégats
+    hero.take_damage(1)
+    
+    #Le héro la vie de hero ne doit pas changer.
+    assert hp0 == hero.hp 
+    
+def test_is_armor_reducing_attack_receive():
+    #Etant donné deux personnages, hero possédant une armure de 1 et monstre 
+    hero = Character(1)
+    h0=hero.hp
+    monstre = Character()
+
+    #Quand heros reçoit une attaque de monstre qui a 0 de force et qui fera entre 0 et 1 de dégats
+    monstre.attack(hero)
+    
+    #Le héro la vie de hero ne doit pas changer.
+
+    assert hero.hp == h0 
+    
+def test_armor_is_reducing_more_than_received():
+    #Etant donné un hero possédant une armure de 3 
+    hero = Character(3)
+    hp0= hero.hp
+
+    #Quand heros reçoit des dommages égale à 1 de dégats
+    hero.take_damage(1)
+    
+    #Le héro la vie de hero ne doit pas changer.
+    assert hp0 == hero.hp 
