@@ -1,8 +1,7 @@
 import random
-
-
 class Character:
-    def __init__(self):
+    
+    def __init__(self, arme_multiplicator:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
@@ -15,9 +14,12 @@ class Character:
         self.force = 0
         self.endurance = 0
         self.hp = 10
-
+        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
         self.attack
-        
+    
+    def ajouter_arme(self, arme_multiplicator:int):
+        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
+                
     def is_alive(self):
         return self.hp > 0
 
@@ -25,13 +27,13 @@ class Character:
         if isinstance(amount, (int, float)) and amount > 0:
             amount = int(amount)
             self.hp -= amount
+            self.hp = round(self.hp)
             if self.hp < 0:
                 self.hp = 0
 
     def attack(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1))
-    
+            target.take_damage(random.randint(0, self.force + 1) * self.arme_multiplicator)
     
     def levelUp(self):
         self.lvl += 1
