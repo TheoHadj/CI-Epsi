@@ -32,8 +32,8 @@ class Character:
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
             amount = amount * (1 - (self.armor/100))
-            if(amount%1 ==0.5):
-                amount = round(amount-0.1)
+            if abs(amount % 1 - 0.5) < 1e-9:
+                amount = int(amount)
             else:
                 amount=round(amount)
                             
