@@ -5,6 +5,9 @@ class Character:
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
+        if not (0 <= armor <= 100):
+            raise ValueError("L'armure doit être comprise entre 0 et 100")
+        
         self.baseEndurance = 1
         self.baseHp = 10
         self.baseForce = 1
@@ -22,7 +25,12 @@ class Character:
 
     def take_damage(self, amount):
         if isinstance(amount, (int, float)) and amount > 0:
-            amount = int(amount) - self.armor
+            amount = int(amount)* 1 - (self.armor/100)
+            if(amount%1 ==0.5):
+                amount = round(amount-0.1)
+            else:
+                amount=round(amount)
+            
             if(amount>0):
                 self.hp -= amount
                 if self.hp < 0:

@@ -1,4 +1,5 @@
 from src.RPG import Character
+import pytest
 
 def test_player_initialization():
     #ETANT DONNE UN PERSONNAGE
@@ -150,9 +151,41 @@ def test_caracteristique_force():
     ennemi.attack(perso)
     assert perso.hp <= perso_base_hp
 
+def test_armor_is_over_powered():
+    #Etant donné un hero possédant une armure de 102 
+    hero = Character(102)
+    
+    #Le héro ne peut pas être créer.
+    assert hero == False 
+
+def test_armor_is_over_powered():
+    #Etant donné un hero possédant une armure de 102 
+    with pytest.raises(ValueError):
+        Character(102)
+    
+    #Le héro ne peut pas être créer.
+def test_armor_is_negative():
+    #Etant donné un hero possédant une armure de -2 
+    with pytest.raises(ValueError):
+        Character(102)
+    
+    #Le héro ne peut pas être créer.
+     
+
 def test_is_armor_reducing_damage_taken():
     #Etant donné un hero possédant une armure de 1 
-    hero = Character(1)
+    hero = Character(50)
+    hp0= hero.hp
+
+    #Quand heros reçoit des dommages égale à 1 de dégats
+    hero.take_damage(2)
+    
+    #Le héro la vie de hero ne doit pas changer.
+    assert (hp0 - 1)== hero.hp 
+    
+def test_is_max_armor_protect_damage_taken():
+    #Etant donné un hero possédant une armure de 1 
+    hero = Character(100)
     hp0= hero.hp
 
     #Quand heros reçoit des dommages égale à 1 de dégats
@@ -163,7 +196,7 @@ def test_is_armor_reducing_damage_taken():
     
 def test_is_armor_reducing_attack_receive():
     #Etant donné deux personnages, hero possédant une armure de 1 et monstre 
-    hero = Character(1)
+    hero = Character(50)
     h0=hero.hp
     monstre = Character()
 
@@ -176,11 +209,11 @@ def test_is_armor_reducing_attack_receive():
     
 def test_armor_is_reducing_more_than_received():
     #Etant donné un hero possédant une armure de 3 
-    hero = Character(3)
+    hero = Character(100)
     hp0= hero.hp
 
     #Quand heros reçoit des dommages égale à 1 de dégats
-    hero.take_damage(1)
+    hero.take_damage(0)
     
     #La vie du hero ne doit pas changer.
     assert hp0 == hero.hp 
