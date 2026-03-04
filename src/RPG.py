@@ -1,35 +1,26 @@
 import random
 
 class Character:
-    def __init__(self, armor:int = 0,  arme_multiplicator:int=1):
+    def __init__(self,level:int,end:int,force:int, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
         if not (0 <= int(armor) <= 100):
             raise ValueError("L'armure doit être comprise entre 0 et 100")
-        
-        self.baseEndurance = 1
+        if (arme < 0):
+            raise ValueError("Le multiplicateur d'arme ne peut pas être négatif")
+        if(level<=0):
+            raise ValueError("Le niveau doit être strictement positif")
+
         self.baseHp = 10
-        self.baseForce = 1
-       
-        self.lvl = 0
 
-        self.force = 0
-        self.endurance = 0
-        self.hp = 10
+        self.lvl = level
+        self.force = force
+        self.endurance = end
+        self.hp = self.baseHp + self.endurance + 2*self.lvl
+        self.armor = armor        
+        self.arme = arme
 
-        self.armor = armor
-        
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
-        self.attack
-    
-    def ajouter_arme(self, arme_multiplicator:int):
-        self.arme_multiplicator = arme_multiplicator if arme_multiplicator > 0 else 1
-
-    def ajouter_armure(self, armor:int):
-        if not (0 <= int(armor) <= 100):
-            raise ValueError("L'armure doit être comprise entre 0 et 100")
-        self.armor = armor
                 
     def is_alive(self):
         return self.hp > 0
@@ -49,13 +40,10 @@ class Character:
 
     def attack(self, target):
         if self.is_alive():
-            target.take_damage(random.randint(0, self.force + 1) * self.arme_multiplicator)
+            target.take_damage(random.randint(0, self.force + 1 + 2*self.lvl) * self.arme)
     
-    def levelUp(self):
+    def levelUp(self): #doesn't exists
         self.lvl += 1
-        self.force += 2*self.baseForce
-        self.endurance += 2*self.baseEndurance
-        self.hp += 2*self.baseEndurance
         
         
 class Equipe:
@@ -92,7 +80,3 @@ class Duel:
     def attaque_equipe(self, equipe_attaque:Equipe, cible_1:Character, cible_2:Character):
         equipe_attaque.perso_1.attack(cible_1)
         equipe_attaque.perso_2.attack(cible_2)
-
-        
-    
-    

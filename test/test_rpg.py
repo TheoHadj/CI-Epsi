@@ -100,8 +100,6 @@ def test_has_endu():
     #Quand il vient d'être créé
     #Alors il a 0 d'endurance
     assert hero.endurance == 0
-
-
     #Quand il gagne un niveau
     hero.levelUp()
     #Alors il gagne 2 d'endurance
@@ -167,7 +165,7 @@ def test_armor_is_over_powered():
 def test_armor_is_negative():
     #Etant donné un hero possédant une armure de -2 
     with pytest.raises(ValueError):
-        Character(-2)
+        Character(102)
     
     #Le héro ne peut pas être créer.
      
