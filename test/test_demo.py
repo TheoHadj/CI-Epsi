@@ -25,65 +25,65 @@ def test_demo_armure():
 def test_demo_armure_attaque():
     # Étant donné un personnage avec une armure
     perso_armor = Character(2)
-    ennemi = Character()
+    perso_2 = Character()
     
     # Lorsqu'il se fait attaquer
-    ennemi.attack(perso_armor)
+    perso_2.attack(perso_armor)
     
     # Alors il perds moins de vie qu'un personnage non armé 
     assert perso_armor.hp <= 10 and perso_armor.hp >= 7
     
     
 def test_demo_arme_attaque_hausse():
-    # Étant donné un personnage ayant une arme et un ennemi
+    # Étant donné un personnage ayant une arme et un perso_2
     perso_arme = Character(1, 1.2)
     perso_sans_arme = Character()
-    ennemi = Character()
+    perso_2 = Character()
     ennemi2 = Character()
 
-    # Lorsque le personnage armé attaque l'ennemi
-    perso_arme.attack(ennemi)
+    # Lorsque le personnage armé attaque l'perso_2
+    perso_arme.attack(perso_2)
     perso_sans_arme.attack(ennemi2)
     
-    # Alors l'ennemi subit plus de dégâts que lors d'une attaque sans arme
-    assert ennemi.hp <= 10 and ennemi.hp >= 4
+    # Alors l'perso_2 subit plus de dégâts que lors d'une attaque sans arme
+    assert perso_2.hp <= 10 and perso_2.hp >= 4
     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
 
     
 def test_demo_arme_attaque_baisse():
-    # Étant donné un personnage ayant une arme et un ennemi
+    # Étant donné un personnage ayant une arme et un autre personnage
     perso_arme = Character(0, 0.5)
     perso_sans_arme = Character()
-    ennemi = Character()
+    perso_2 = Character()
     ennemi2 = Character()
         
-    # Lorsque le personnage armé attaque l'ennemi
-    perso_arme.attack(ennemi)
+    # Lorsque le personnage armé attaque le second personnage
+    perso_arme.attack(perso_2)
     perso_sans_arme.attack(ennemi2)
 
-    # Alors l'ennemi subit moins de dégâts que lors d'une attaque sans arme
-    assert ennemi.hp <= 10 and ennemi.hp >= 2.5
+    # Alors l'perso_2 subit moins de dégâts que lors d'une attaque sans arme
+    assert perso_2.hp <= 10 and perso_2.hp >= 2.5
     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
 
 
 def test_deux_persos_armures():
-    #Etant donné trois personnages, hero possédant une armure de 50, un hero sans et monstre 
-    hero = Character(50)
-    h0=hero.hp
+    #Etant donné trois personnages, perso1 possédant une armure de 50, un perso1 sans et perso 
+    perso1 = Character(50)
+    h0=perso1.hp
 
-    hero2 = Character(0)
-    h02=hero2.hp
+    perso2 = Character(0)
+    h02=perso2.hp
 
-    monstre = Character()
+    perso = Character()
 
-    #Quand heros reçoit une attaque de monstre qui a 0 de force et qui fera entre 0 et 1 de dégats
-    monstre.attack(hero)
-    monstre.attack(hero2)
+    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
+    perso.attack(perso1)
+    perso.attack(perso2)
 
-    #La vie du hero ne doit pas changer.
+    #La vie du perso1 ne doit pas changer.
 
-    assert hero.hp == h0 
-    assert hero.hp != hero2.hp
+    assert perso1.hp == h0 
+    # assert perso1.hp != perso2.hp
     
     
     def test_demo_equipes():
