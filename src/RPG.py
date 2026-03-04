@@ -60,7 +60,7 @@ def duel(self, ally: "Character", target: "Character", target1: "Character"):
         while (self.is_alive() or ally.is_alive()) and (target.is_alive() or target1.is_alive()):
             for attaquant in [self, ally, target, target1]:
                 if attaquant.is_alive():
-                    print(f"\nC'est au tour de {attaquant} (LVL {attaquant.lvl})")
+                    print(f"\nC'est au tour de {attaquant.name} (LVL {attaquant.lvl})")
                     
                     choix = ""
                     while choix not in ["1", "2","3","4"]:
