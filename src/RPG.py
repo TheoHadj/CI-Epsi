@@ -9,13 +9,13 @@ class Character:
         self.baseAttack_power = 1
         self.baseEndurance = 1
         self.baseHp = 10
+        self.baseForce = 1
        
-        self.lvl = 0
+        self.lvl = 1
 
-        self.attack_power = 2*self.baseAttack_power* self.lvl
         self.endurance = 2*self.baseEndurance * self.lvl
         self.hp = self.baseHp + self.endurance
-        self.force = 0
+        self.force = 2*self.baseForce * self.lvl
         
     def is_alive(self):
         return self.hp > 0
@@ -30,4 +30,4 @@ class Character:
 
     def attack(self, target):
         if self.is_alive():
-            target.take_damage(self.attack_power)
+            target.take_damage(self.baseAttack_power)
