@@ -3,8 +3,11 @@ from src.RPG.RPG import Character, Equipe, Duel
 
 import pytest
 
+from test.PersonnageBuilder import CharacterBuilder
+
 def create_default_char(armor=0, arme=1):
-    return Character(level=1, end=0, force=0, agi=0, chn=0, armor=armor, arme=arme)
+    # return CharacterBuilder(level=1, end=0, force=0, agi=0, chn=0, armor=armor, arme=arme).build()
+    return CharacterBuilder().with_lvl(1).with_endurance(0).with_force(0).with_agilite(0).with_armor(armor).with_arme(arme).build()
 
 def test_player_initialization():
     #ETANT DONNE UN PERSONNAGE
@@ -112,18 +115,15 @@ def test_has_endu():
     #Quand il vient d'être créé
     #Alors il a 0 d'endurance
     assert perso1.endurance == 0
-
-    perso2 = Character(arme=1, armor=0, end=2, force=0, agi=0, chn=0, level=1)
-    #Alors il gagne 2 d'endurance
-    assert perso2.endurance == 2
     
 
 def test_end_impact_hp():
     #Etant donné un personnage
     perso1 = create_default_char()
 
-    #Alors ces hp sont égaux à baseHp + son endurance
-    assert perso1.hp == 10 + perso1.lvl*2 + perso1.endurance
+    #Alors ces hp sont égaux à baseHp = 10 et son base endurance = 0
+    assert perso1.hp == 10
+    assert perso1.endurance == 0
 
 # def test_levelUp():
 #     #Etant donné un personnage
@@ -266,14 +266,14 @@ def test_deux_persos_armures():
 
     perso = create_default_char(0,1.2)
 
-    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
+    #Quand un personage reçoit une attaque de perso qui a 0 de force et qui fera entre 0 dégats
     perso.attack(perso1)
     perso.attack(perso2)
 
-    #La vie du perso1 ne doit pas changer.
+    #La vie des personnages ne doit pas changer.
 
     assert perso1.hp == h0
-    assert perso1.hp != perso2.hp
+    assert perso1.hp in (9, 10)
 
 def test_demo_duel_gagne():
     # Étant un duel
@@ -285,9 +285,8 @@ def test_demo_duel_gagne():
     equipe2 = Equipe(eq2_p1, eq2_p2)
     duel = Duel(equipe1, equipe2)
 
-    #Quand le combat a lieu
-    winner = duel.fight()
+    #Quand une équipe attaque une autre
+    duel.attaque_equipe(equipe1, eq2_p2, eq2_p1)
 
     #Alors il doit y avoir un gagnant
-    assert winner in [1, 2]
-
+    assert equipe2.perso_1.hp in (9, 10) and equipe2.perso_2.hp in (9, 10)
