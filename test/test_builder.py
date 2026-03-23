@@ -1,7 +1,11 @@
-from test.Builder import CharacterBuilder
+from test.PersonnageBuilder import CharacterBuilder
 
 
 def test_builder():
+    default = CharacterBuilder().build()
+    assert default.force == 0
+    assert default.armor == 0
+    
     p = CharacterBuilder().with_force(10).with_agilite(5).build()
 
     assert p.force == 10
