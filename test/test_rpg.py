@@ -1,4 +1,5 @@
-from src.RPG.RPG import Character, Equipe, Duel
+from src.RPG import Character, Equipe, Duel
+from src.RPG.Character import Character
 
 import pytest
 
@@ -10,7 +11,7 @@ def test_player_initialization():
     p = create_default_char()
 
     #doit avoir hp==10 + endurance
-    assert p.hp == 12 + p.endurance
+    assert p.hp == 10 + p.endurance
 
 def test_attack_reduces_hp():
     # ETANT DONNE deux personnages un perso et un perso1 avec 10 PV
@@ -268,7 +269,7 @@ def test_deux_persos_armures():
 
 def test_demo_duel_gagne():
     # Étant un duel
-    eq1_p1 = create_default_char(50, 1.5)
+    eq1_p1 = Character.prebuiltChar()
     eq1_p2 = create_default_char(0, 1)
     eq2_p1 = create_default_char(0, 1.1)
     eq2_p2 = create_default_char(20, 1.2)
@@ -281,3 +282,4 @@ def test_demo_duel_gagne():
 
     #Alors il doit y avoir un gagnant
     assert winner in [1, 2]
+

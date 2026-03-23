@@ -1,4 +1,4 @@
-from src.RPG import Character
+from src.RPG.Character import Character
 
 
 class CharacterBuilder:
