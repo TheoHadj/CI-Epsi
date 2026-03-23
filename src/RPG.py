@@ -93,6 +93,16 @@ class Duel:
         equipe_attaque.perso_1.attack(cible_1)
         equipe_attaque.perso_2.attack(cible_2)
 
-        
     
-    
+
+
+
+    #BUilders
+    @classmethod
+    def prebuiltChar():
+        return Character(level=5, end=20, force=15, agi=8, luck=5, armor=30)
+
+    @classmethod
+    def sacDeFrappe():
+        return Character(level=1000, end=1000, force=0, agi=0, luck=0, armor=0)
+
