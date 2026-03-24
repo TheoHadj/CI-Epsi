@@ -74,10 +74,6 @@ class Equipe:
             else:
                 return self.perso2
 
-            
-        
-            
-
 class Duel:
     def __init__(self, equipe1:Equipe, equipe2:Equipe):
         self.equipe1 = equipe1
@@ -97,16 +93,16 @@ class Duel:
         
     def getOrder(self):
         tous_les_combattants = [
-        self.equipe1.perso_1, self.equipe1.perso_2,
-        self.equipe2.perso_1, self.equipe2.perso_2
+        self.equipe1.perso1, self.equipe1.perso2,
+        self.equipe2.perso1, self.equipe2.perso2
         ]
                 
         p1 = max(tous_les_combattants, key=lambda p: p.agi)
-        eq_attaquante = self.equipe1 if p1 in [self.equipe1.perso_1, self.equipe1.perso_2] else self.equipe2
+        eq_attaquante = self.equipe1 if p1 in [self.equipe1.perso1, self.equipe1.perso2] else self.equipe2
         eq_adverse = self.equipe2 if eq_attaquante == self.equipe1 else self.equipe1
-        p2 = max([eq_adverse.perso_1, eq_adverse.perso_2], key=lambda p: p.agi)            
-        p3 = eq_attaquante.perso_2 if p1 == eq_attaquante.perso_1 else eq_attaquante.perso_1
-        p4 = eq_adverse.perso_2 if p2 == eq_adverse.perso_1 else eq_adverse.perso_1
+        p2 = max([eq_adverse.perso1, eq_adverse.perso2], key=lambda p: p.agi)            
+        p3 = eq_attaquante.perso2 if p1 == eq_attaquante.perso1 else eq_attaquante.perso1
+        p4 = eq_adverse.perso2 if p2 == eq_adverse.perso1 else eq_adverse.perso1
 
         return [p1, p2, p3, p4]
     

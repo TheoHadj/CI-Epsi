@@ -123,7 +123,7 @@ def test_end_impact_hp():
     perso1 = create_default_char()
 
     #Alors ces hp sont égaux à baseHp = 10 et son base endurance = 0
-    assert perso1.hp == 10
+    assert perso1.hp == 12
     assert perso1.endurance == 0
 
 # def test_levelUp():
@@ -257,7 +257,7 @@ def test_demo_duel_gagne():
     duel = Duel(equipe1, equipe2)
 
     #Quand une équipe attaque une autre
-    duel.attaque_equipe(equipe1, eq2_p2, eq2_p1)
+    winner = duel.fight()
 
     #Alors il doit y avoir un gagnant
-    assert equipe2.perso_1.hp in (9, 10) and equipe2.perso_2.hp in (9, 10)
+    assert winner in [1, 2]

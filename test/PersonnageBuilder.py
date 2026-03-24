@@ -59,6 +59,6 @@ class CharacterBuilder:
         c.agi = self._agilite
         # c.chn = self._chance
         c.lvl = self._lvl
-        c.hp = c.baseHp + c.endurance
+        c.hp = c.baseHp + c.endurance + 2*c.lvl
 
         return c
