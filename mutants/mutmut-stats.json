@@ -1,54 +1,108 @@
 {
     "tests_by_mangled_function_name": {
-        "RPG.x\u01c1Character\u01c1__init__": [
-            "test/test_rpg.py::test_caracteristique_force",
-            "test/test_rpg.py::test_player_kill",
-            "test/test_rpg.py::test_attack_reduces_hp",
+        "RPG.RPG.x\u01c1Character\u01c1__init__": [
+            "test/test_rpg.py::test_degats_fixes",
+            "test/test_rpg.py::test_demo_duel_gagne",
+            "test/test_rpg.py::test_is_armor_reducing_damage_taken",
             "test/test_rpg.py::test_player_over_damage",
-            "test/test_rpg.py::test_valid_take_damage_argument",
-            "test/test_rpg.py::test_player_death",
             "test/test_rpg.py::test_dead_player_cant_attack",
-            "test/test_rpg.py::test_player_initialization",
+            "test/test_rpg.py::test_is_max_armor_protect_damage_taken",
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_valid_take_damage_argument",
+            "test/test_rpg.py::test_armor_is_reducing_more_than_received",
+            "test/test_rpg.py::test_has_endu",
+            "test/test_rpg.py::test_armor_is_over_powered",
+            "test/test_rpg.py::test_caracteristique_force",
             "test/test_rpg.py::test_end_impact_hp",
-            "test/test_rpg.py::test_has_endu"
+            "test/test_builder.py::test_builder",
+            "test/test_rpg.py::test_armor_is_negative",
+            "test/test_rpg.py::test_player_initialization",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_player_death",
+            "test/test_rpg.py::test_attack_calls_take_damage_spy",
+            "test/test_rpg.py::test_deux_persos_armures"
         ],
-        "RPG.x\u01c1Character\u01c1take_damage": [
+        "RPG.RPG.x\u01c1Character\u01c1attack": [
+            "test/test_rpg.py::test_attack_reduces_hp",
+            "test/test_rpg.py::test_attack_calls_take_damage_spy",
+            "test/test_rpg.py::test_deux_persos_armures",
+            "test/test_rpg.py::test_degats_fixes",
             "test/test_rpg.py::test_caracteristique_force",
             "test/test_rpg.py::test_player_kill",
-            "test/test_rpg.py::test_attack_reduces_hp",
             "test/test_rpg.py::test_player_over_damage",
+            "test/test_rpg.py::test_dead_player_cant_attack"
+        ],
+        "RPG.RPG.x\u01c1Character\u01c1take_damage": [
+            "test/test_rpg.py::test_attack_reduces_hp",
             "test/test_rpg.py::test_valid_take_damage_argument",
             "test/test_rpg.py::test_player_death",
-            "test/test_rpg.py::test_dead_player_cant_attack"
-        ],
-        "RPG.x\u01c1Character\u01c1attack": [
+            "test/test_rpg.py::test_armor_is_reducing_more_than_received",
+            "test/test_rpg.py::test_attack_calls_take_damage_spy",
+            "test/test_rpg.py::test_deux_persos_armures",
+            "test/test_rpg.py::test_degats_fixes",
+            "test/test_rpg.py::test_is_armor_reducing_damage_taken",
             "test/test_rpg.py::test_caracteristique_force",
             "test/test_rpg.py::test_player_kill",
-            "test/test_rpg.py::test_attack_reduces_hp",
             "test/test_rpg.py::test_player_over_damage",
-            "test/test_rpg.py::test_dead_player_cant_attack"
+            "test/test_rpg.py::test_dead_player_cant_attack",
+            "test/test_rpg.py::test_is_max_armor_protect_damage_taken"
         ],
-        "RPG.x\u01c1Character\u01c1is_alive": [
-            "test/test_rpg.py::test_caracteristique_force",
-            "test/test_rpg.py::test_player_kill",
+        "RPG.RPG.x\u01c1Character\u01c1is_alive": [
             "test/test_rpg.py::test_attack_reduces_hp",
-            "test/test_rpg.py::test_player_over_damage",
             "test/test_rpg.py::test_player_death",
+            "test/test_rpg.py::test_attack_calls_take_damage_spy",
+            "test/test_rpg.py::test_deux_persos_armures",
+            "test/test_rpg.py::test_degats_fixes",
+            "test/test_rpg.py::test_caracteristique_force",
+            "test/test_rpg.py::test_player_kill",
+            "test/test_rpg.py::test_player_over_damage",
             "test/test_rpg.py::test_dead_player_cant_attack"
+        ],
+        "RPG.RPG.x\u01c1Duel\u01c1fight": [
+            "test/test_rpg.py::test_demo_duel_gagne",
+            "test/test_rpg.py::test_demo_duel_gagne_with_stubs",
+            "test/test_rpg.py::test_duel_fight_with_dummies_and_stubs"
+        ],
+        "RPG.RPG.x\u01c1Duel\u01c1__init__": [
+            "test/test_rpg.py::test_demo_duel_gagne",
+            "test/test_rpg.py::test_demo_duel_gagne_with_stubs",
+            "test/test_rpg.py::test_duel_fight_with_dummies_and_stubs"
+        ],
+        "RPG.RPG.x\u01c1Equipe\u01c1__init__": [
+            "test/test_rpg.py::test_demo_duel_gagne",
+            "test/test_rpg.py::test_who_lowest_logic_stub",
+            "test/test_rpg.py::test_demo_duel_gagne_with_stubs",
+            "test/test_rpg.py::test_duel_fight_with_dummies_and_stubs"
+        ],
+        "RPG.RPG.x\u01c1Equipe\u01c1whoLowest": [
+            "test/test_rpg.py::test_who_lowest_logic_stub"
         ]
     },
     "duration_by_test": {
-        "test/test_rpg.py::test_player_initialization": 0.0003405000170459971,
-        "test/test_rpg.py::test_attack_reduces_hp": 0.0002512499922886491,
-        "test/test_rpg.py::test_player_death": 0.000251375007792376,
-        "test/test_rpg.py::test_player_kill": 0.0005758329934906214,
-        "test/test_rpg.py::test_player_over_damage": 0.0002707919920794666,
-        "test/test_rpg.py::test_dead_player_cant_attack": 0.0002682490012375638,
-        "test/test_rpg.py::test_valid_take_damage_argument": 0.0001911670115077868,
-        "test/test_rpg.py::test_has_endu": 0.0001897509937407449,
-        "test/test_rpg.py::test_end_impact_hp": 0.0001720830041449517,
-        "test/test_rpg.py::test_caracteristique_force": 0.00019458399037830532,
-        "test/test_true.py::test_true": 0.0001778750156518072
+        "test/test_builder.py::test_builder": 0.00039316700167546514,
+        "test/test_rpg.py::test_player_initialization": 0.0002291670025442727,
+        "test/test_rpg.py::test_attack_reduces_hp": 0.00030041699756111484,
+        "test/test_rpg.py::test_player_death": 0.00025354200079164,
+        "test/test_rpg.py::test_player_kill": 0.0002746250011114171,
+        "test/test_rpg.py::test_player_over_damage": 0.000324957001794246,
+        "test/test_rpg.py::test_dead_player_cant_attack": 0.00027016700187232345,
+        "test/test_rpg.py::test_valid_take_damage_argument": 0.0002309990013600327,
+        "test/test_rpg.py::test_has_endu": 0.00019412599976931233,
+        "test/test_rpg.py::test_end_impact_hp": 0.00019279099979030434,
+        "test/test_rpg.py::test_caracteristique_force": 0.00022024899953976274,
+        "test/test_rpg.py::test_armor_is_over_powered": 0.00031783399936102796,
+        "test/test_rpg.py::test_armor_is_negative": 0.00020716600010928232,
+        "test/test_rpg.py::test_is_armor_reducing_damage_taken": 0.0002045840010396205,
+        "test/test_rpg.py::test_is_max_armor_protect_damage_taken": 0.00019637500190583523,
+        "test/test_rpg.py::test_armor_is_reducing_more_than_received": 0.00019295799938845448,
+        "test/test_rpg.py::test_degats_fixes": 0.0028326250012469245,
+        "test/test_rpg.py::test_deux_persos_armures": 0.00046595800085924566,
+        "test/test_rpg.py::test_demo_duel_gagne": 0.00023729100030323025,
+        "test/test_rpg.py::test_attack_calls_take_damage_spy": 0.0006338750008580973,
+        "test/test_rpg.py::test_who_lowest_logic_stub": 0.001116667001042515,
+        "test/test_rpg.py::test_duel_fight_with_dummies_and_stubs": 0.0018450009993102867,
+        "test/test_rpg.py::test_demo_duel_gagne_with_stubs": 0.003022083999894676,
+        "test/test_true.py::test_true": 0.00020354200023575686
     },
-    "stats_time": 0.15376299999999998
+    "stats_time": 0.27223200000000003
 }
