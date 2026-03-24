@@ -1,5 +1,6 @@
 from src.RPG.RPG import Character, Equipe, Duel
 # from src.RPG.Character import Character #Refacto
+from unittest.mock import patch
 
 import pytest
 
@@ -255,6 +256,18 @@ def test_armor_is_reducing_more_than_received():
 #     assert perso2.hp <= 10 and perso2.hp >= 2.5
 #     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
 
+
+def test_degats_fixes():
+    #Etant donné 2 Characters
+    attaquant = Character() 
+    cible = Character()
+    
+    #Quand l'attaquant attaque 6 hp à la cible
+    with patch('src.RPG.RPG.random.randint', return_value=6):
+        attaquant.attack(cible)
+        
+    #Alors la cible, qui a 12 hp, perd 6 hp, et se retrouve à 6 hp  
+    assert cible.hp == 6
 
 def test_deux_persos_armures():
     #Etant donné trois personnages, perso1 possédant une armure de 50, un perso1 sans et perso

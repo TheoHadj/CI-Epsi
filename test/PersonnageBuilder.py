@@ -18,7 +18,7 @@ class CharacterBuilder:
         self._chance = 0
         self._armor = 0
         self._arme = 1
-        self._lvl = 0
+        self._lvl = 1
 
     def with_force(self, v):
         self._force = v
