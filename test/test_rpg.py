@@ -1,4 +1,4 @@
-from src.RPG.RPG import Character, Equipe, Duel
+from RPG.RPG import Character, Equipe, Duel
 # from src.RPG.Character import Character #Refacto
 from unittest.mock import MagicMock, Mock, patch
 
