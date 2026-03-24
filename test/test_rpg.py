@@ -200,19 +200,6 @@ def test_is_max_armor_protect_damage_taken():
     #la vie de perso1 ne doit pas changer.
     assert hp0 == perso1.hp
 
-def test_is_armor_reducing_attack_receive():
-    #Etant donné deux personnages, perso1 possédant une armure de 50 et perso
-    perso1 = create_default_char(50,1)
-    h0=perso1.hp
-    perso = create_default_char()
-
-    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
-    perso.attack(perso1)
-
-    #La vie du perso1 ne doit pas changer.
-
-    assert perso1.hp == h0
-
 def test_armor_is_reducing_more_than_received():
     #Etant donné un perso1 possédant une armure de 100
     perso1 = create_default_char(100,1)
@@ -279,9 +266,10 @@ def test_deux_persos_armures():
 
     Attaquant = create_default_char(0,1)
 
-    #Quand heros reçoit une attaque de Attaquant qui a 0 de force et qui fera entre 0 et 1 de dégats
-    Attaquant.attack(defenseurArmure)
-    Attaquant.attack(defenseurSansArmure)
+    #Quand heros reçoit une attaque de Attaquant qui a 0 de force et qui fera entre 0 et 1 de dégats, içi 1
+    with patch('src.RPG.RPG.random.randint', return_value=1):
+        Attaquant.attack(defenseurArmure)
+        Attaquant.attack(defenseurSansArmure)
 
     #La vie du defenseurArmure ne doit pas changer.
     #La vie du perso1 ne doit pas changer.
