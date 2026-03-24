@@ -1,6 +1,8 @@
 from src.RPG.RPG import Character, Equipe, Duel
 # from src.RPG.Character import Character #Refacto
 
+import pytest
+
 def create_default_char(armor=0, arme=1):
     return Character(level=1, end=0, force=0, agi=0, chn=0, armor=armor, arme=arme)
 
