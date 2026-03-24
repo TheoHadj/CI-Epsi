@@ -1,7 +1,5 @@
-from src.RPG import Character, Equipe, Duel
-from src.RPG.Character import Character
-
-import pytest
+from src.RPG.RPG import Character, Equipe, Duel
+# from src.RPG.Character import Character #Refacto
 
 def create_default_char(armor=0, arme=1):
     return Character(level=1, end=0, force=0, agi=0, chn=0, armor=armor, arme=arme)
@@ -10,8 +8,8 @@ def test_player_initialization():
     #ETANT DONNE UN PERSONNAGE
     p = create_default_char()
 
-    #doit avoir hp==10 + endurance
-    assert p.hp == 10 + p.endurance
+    #doit avoir hp==10 + endurance + 2*lvl
+    assert p.hp == 10 + p.endurance + 2* p.lvl
 
 def test_attack_reduces_hp():
     # ETANT DONNE deux personnages un perso et un perso1 avec 10 PV
