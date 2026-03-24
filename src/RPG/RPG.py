@@ -1,7 +1,7 @@
 import random
 
 class Character:
-    def __init__(self,level:int,end:int,force:int, agi:int, chn:int, armor:int = 0,  arme:int=1):
+    def __init__(self,level:int=1,end:int=0,force:int=0, agi:int=0, chn:int=0, armor:int = 0,  arme:int=1):
         # self.name = name
         # self.hp = hp
         # self.attack_power = attack_power
