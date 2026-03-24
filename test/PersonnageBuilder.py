@@ -1,4 +1,4 @@
-from src.RPG.Character import Character
+from src.RPG.RPG import Character
 
 
 class CharacterBuilder:
@@ -51,13 +51,13 @@ class CharacterBuilder:
     def build(self):
         c = Character(
             armor=self._armor,
-            arme_multiplicator=self._arme
+            arme=self._arme
         )
 
         c.force = self._force
         c.endurance = self._endurance
-        c.agilite = self._agilite
-        c.chance = self._chance
+        c.agi = self._agilite
+        # c.chn = self._chance
         c.lvl = self._lvl
         c.hp = c.baseHp + c.endurance
 

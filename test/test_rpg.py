@@ -13,6 +13,14 @@ def test_player_initialization():
     #doit avoir hp==10 + endurance + 2*lvl
     assert p.hp == 10 + p.endurance + 2* p.lvl
 
+def test_player_initialization():
+    #ETANT DONNE UN PERSONNAGE NIVEAU 1 AVEC 0 ENDURANCE
+    p = create_default_char()
+
+    #doit avoir hp==10 + 0 + 2*1 == 12
+    assert p.hp == 12
+
+
 def test_attack_reduces_hp():
     # ETANT DONNE deux personnages un perso et un perso1 avec 10 PV
     perso1 = create_default_char()
