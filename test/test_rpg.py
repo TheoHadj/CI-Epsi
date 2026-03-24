@@ -270,27 +270,29 @@ def test_degats_fixes():
     assert cible.hp == 6
 
 def test_deux_persos_armures():
-    #Etant donné trois personnages, perso1 possédant une armure de 50, un perso1 sans et perso
-    perso1 = create_default_char(50,1)
-    h0=perso1.hp
+    #Etant donné trois personnages, defenseurArmure possédant une armure de 50, un defenseurSansArmure et Attaquant
+    defenseurArmure = create_default_char(50,1)
+    h0=defenseurArmure.hp
 
-    perso2 = create_default_char(0,1)
-    h02=perso2.hp
+    defenseurSansArmure = create_default_char(0,1)
+    h02=defenseurSansArmure.hp
 
-    perso = create_default_char(0,1.2)
+    Attaquant = create_default_char(0,1)
 
-    #Quand heros reçoit une attaque de perso qui a 0 de force et qui fera entre 0 et 1 de dégats
-    perso.attack(perso1)
-    perso.attack(perso2)
+    #Quand heros reçoit une attaque de Attaquant qui a 0 de force et qui fera entre 0 et 1 de dégats
+    Attaquant.attack(defenseurArmure)
+    Attaquant.attack(defenseurSansArmure)
 
+    #La vie du defenseurArmure ne doit pas changer.
     #La vie du perso1 ne doit pas changer.
 
-    assert perso1.hp == h0
-    assert perso1.hp != perso2.hp
+    assert defenseurArmure.hp == h0
+    assert defenseurSansArmure.hp < h02
+    assert defenseurArmure.hp > defenseurSansArmure.hp
 
 def test_demo_duel_gagne():
     # Étant un duel
-    eq1_p1 = Character.prebuiltChar()
+    eq1_p1 = create_default_char()
     eq1_p2 = create_default_char(0, 1)
     eq2_p1 = create_default_char(0, 1.1)
     eq2_p2 = create_default_char(20, 1.2)
