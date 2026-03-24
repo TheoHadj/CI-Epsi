@@ -265,18 +265,18 @@ def test_demo_duel_gagne():
     
 # --------- Spy, Stubs and Dummys -----
 def test_attack_calls_take_damage_spy():
-    # GIVEN un attaquant et un défenseur (Spy)
+    # Étant donné un attaquant et un défenseur (Spy)
     attacker = create_default_char()
     target_spy = MagicMock(wraps=create_default_char())
     
-    # WHEN l'attaquant porte un coup
+    # Lorsque l'attaquant porte un coup
     attacker.attack(target_spy)
     
-    # THEN on vérifie que la méthode take_damage du défenseur a bien été appelée
+    # Alors on vérifie que la méthode take_damage du défenseur a bien été appelée
     target_spy.take_damage.assert_called_once()
 
 def test_who_lowest_logic_stub():
-    # GIVEN une équipe avec deux personnages aux santés différentes (Stubs)
+    # Étant donné une équipe avec deux personnages aux santés différentes (Stubs)
     p1 = MagicMock(spec=Character)
     p1.hp = 1
     p1.maxHp = 10
@@ -285,14 +285,14 @@ def test_who_lowest_logic_stub():
     p2.maxHp = 10
     eq = Equipe(p1, p2)
     
-    # WHEN on cherche le membre le plus faible
+    # Lorsque on cherche le membre le plus faible
     result = eq.whoLowest()
     
-    # THEN le personnage avec le plus bas ratio de PV est retourné
+    # Alors le personnage avec le plus bas ratio de PV est retourné
     assert result == p1
 
 def test_duel_fight_with_dummies_and_stubs():
-    # GIVEN un duel entre deux équipes composées de personnages fictifs (Dummies)
+    # Étant donné un duel entre deux équipes composées de personnages fictifs (Dummies)
     p_dummy1 = Mock(spec=Character)
     p_dummy2 = Mock(spec=Character)
     p_dummy3 = Mock(spec=Character)
@@ -308,14 +308,14 @@ def test_duel_fight_with_dummies_and_stubs():
     duel.getOrder = MagicMock(return_value=[p_dummy1, p_dummy3, p_dummy2, p_dummy4])
     duel.get_enemy_team = MagicMock(return_value=eq2)
     
-    # WHEN le combat se déroule
+    # Lorsque le combat se déroule
     winner = duel.fight()
     
-    # THEN l'équipe 1 est déclarée vainqueur
+    # Alors l'équipe 1 est déclarée vainqueur
     assert winner == 1
 
 def test_demo_duel_gagne_with_stubs():
-    # GIVEN des personnages avec des agilités fixes pour supprimer l'aléatoire (Stubs)
+    # Étant donné des personnages avec des agilités fixes pour supprimer l'aléatoire (Stubs)
     eq1_p1 = MagicMock(spec=Character)
     eq1_p1.agi = 10
     eq1_p2 = MagicMock(spec=Character)
@@ -335,8 +335,8 @@ def test_demo_duel_gagne_with_stubs():
     duel = Duel(equipe1, equipe2)
     duel.getOrder = MagicMock(return_value=[eq1_p1, eq2_p1, eq1_p2, eq2_p2])
     
-    # WHEN le combat a lieu
+    # Lorsque le combat a lieu
     winner = duel.fight()
     
-    # THEN l'issue du combat est déterministe
+    # Alors l'issue du combat est déterministe
     assert winner == 1
