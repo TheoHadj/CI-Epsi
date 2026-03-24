@@ -212,38 +212,6 @@ def test_armor_is_reducing_more_than_received():
     #La vie du perso1 ne doit pas changer.
     assert hp0 == perso1.hp
 
-# def test_demo_arme_attaque_hausse():
-#     # Étant donné un personnage ayant une arme et un perso2
-#     perso_arme = create_default_char(0, 1.2)
-#     perso_sans_arme = create_default_char(0,1.2)
-#     perso2 = create_default_char(0,1.2)
-#     ennemi2 = create_default_char(0,1.2)
-
-#     # Lorsque le personnage armé attaque l'perso2
-#     perso_arme.attack(perso2)
-#     perso_sans_arme.attack(ennemi2)
-
-#     # Alors l'perso2 subit plus de dégâts que lors d'une attaque sans arme
-#     assert perso2.hp <= 10 and perso2.hp >= 4
-#     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
-
-
-# def test_demo_arme_attaque_baisse():
-#     # Étant donné un personnage ayant une arme et un autre personnage
-#     perso_arme = create_default_char(0, 0.5)
-#     perso_sans_arme = create_default_char(0,1.2)
-#     perso2 = create_default_char(0,1.2)
-#     ennemi2 = create_default_char(0,1.2)
-
-#     # Lorsque le personnage armé attaque le second personnage
-#     perso_arme.attack(perso2)
-#     perso_sans_arme.attack(ennemi2)
-
-#     # Alors l'perso2 subit moins de dégâts que lors d'une attaque sans arme
-#     assert perso2.hp <= 10 and perso2.hp >= 2.5
-#     assert ennemi2.hp <= 10 and ennemi2.hp >= 5
-
-
 def test_degats_fixes():
     #Etant donné 2 Characters
     attaquant = Character() 
