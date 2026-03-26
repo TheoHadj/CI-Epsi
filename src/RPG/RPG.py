@@ -21,6 +21,9 @@ class Character:
 
     def is_alive(self):
         return self.hp > 0
+    
+    def est_en_danger(self):
+        return self.hp < (self.maxHp * 0.3)
 
     def take_damage(self, amount):
         if not isinstance(amount, (int, float)) or amount <= 0:
@@ -70,6 +73,14 @@ class Equipe:
         if not m1_en_vie: return self.membre2
         if not m2_en_vie: return self.membre1
         
+        m1_danger = self.membre1.est_en_danger()
+        m2_danger = self.membre2.est_en_danger()
+        
+        if m1_danger and not m2_danger:
+            return self.membre1
+        if m2_danger and not m1_danger:
+            return self.membre2
+            
         ratio1 = self.membre1.hp / self.membre1.maxHp
         ratio2 = self.membre2.hp / self.membre2.maxHp
         

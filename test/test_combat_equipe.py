@@ -55,3 +55,21 @@ def test_equipe_morte_quand_tous_les_membres_sont_morts():
 
     # ALORS l'équipe est considérée comme morte
     assert equipe.isAlive() is False
+    
+def test_priorite_cible_en_danger_critique():
+    # ETANT DONNE une équipe avec :
+    # Membre A : 10/40 PV (25% -> EN DANGER)
+    # Membre B : 8/20 PV (40% -> SAIN)
+    membre_en_danger = CharacterBuilder().with_endurance(26).with_lvl(1).build() # maxHp 40
+    membre_en_danger.take_damage(30) 
+    
+    membre_faible_mais_sain = CharacterBuilder().with_lvl(1).build() # maxHp 12
+    membre_faible_mais_sain.take_damage(4) 
+    
+    equipe = Equipe(membre_en_danger, membre_faible_mais_sain)
+    
+    # QUAND l'ennemi cherche la cible
+    cible = equipe.whoLowest()
+    
+    # ALORS il choisit celui qui est en danger (< 30%) même s'il a plus de PV bruts que l'autre
+    assert cible == membre_en_danger
