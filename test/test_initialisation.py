@@ -50,3 +50,12 @@ def test_erreur_multiplicateur_arme_negatif():
     # ALORS une erreur est levée
     with pytest.raises(ValueError):
         Character(arme=-2)
+        
+def test_multiplicateur_arme_est_bien_enregistre():
+    # ETANT DONNE un multiplicateur d'arme spécifique de 2.5
+    multiplicateur = 2.5
+    # QUAND on crée le personnage
+    perso = Character(arme=multiplicateur)
+    # ALORS la valeur doit être exactement celle saisie
+    assert perso.arme == 2.5
+    

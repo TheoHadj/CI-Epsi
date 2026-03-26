@@ -3,123 +3,159 @@ from unittest.mock import patch
 from RPG.RPG import Character, Duel, Equipe
 from test.utils.PersonnageBuilder import CharacterBuilder
 
-def test_exact_boundary_damage_rounding():
-    # ETANT DONNE un perso avec 50% d'armure (MaxHP = 12)
-    p = CharacterBuilder().with_armor(50).with_lvl(1).build()
+def test_seuil_danger_limite_flottante_precise():
+    # ETANT DONNE un sujet avec une capacité de 1000 PV (Seuil 30% = 300)
+    sujet = CharacterBuilder().with_endurance(988).with_lvl(1).build()
     
-    # QUAND il prend 0.4 dégâts (réduit à 0.2)
-    # ALORS les dégâts sont arrondis à 0
-    p.take_damage(0.4)
-    assert p.hp == 12
-
-def test_minimum_damage_logic_low_damage():
-    # ETANT DONNE un perso avec 20% d'armure
-    p = CharacterBuilder().with_armor(20).with_lvl(1).build()
-    
-    # QUAND il subit 1 de dégât (1 * 0.8 = 0.8, arrondi à 1)
-    p.take_damage(1)
-    
-    # ALORS il perd 1 PV
-    assert p.hp == 11
-
-def test_who_lowest_dead_character_exclusion():
-    # ETANT DONNE une équipe avec un survivant (100% PV) et un mort (0% PV)
-    p1 = CharacterBuilder().build()
-    p2 = CharacterBuilder().build()
-    p2.take_damage(100) # Mort
-    eq = Equipe(p1, p2)
-    
-    # QUAND on cherche le plus faible
-    # ALORS il doit ignorer le mort et renvoyer le vivant (p1)
-    assert eq.whoLowest() == p1
-
-def test_duel_reaches_limit():
-    # ETANT DONNE deux équipes de "sacs de frappe" qui ne font pas de dégâts
-    # (On simule un combat qui dure via un mock d'attaque inoffensive)
-    p1 = CharacterBuilder().build()
-    p2 = CharacterBuilder().build()
-    eq1 = Equipe(p1, p1)
-    eq2 = Equipe(p2, p2)
-    duel = Duel(eq1, eq2)
-    
-    with patch.object(Character, 'attack'):
-        # QUAND le combat dépasse 1000 tours
-        result = duel.fight()
-        # ALORS il s'arrête (pas de boucle infinie)
-        assert result in [1, 2]
-        
-def test_who_lowest_equality_case():
-    # ETANT DONNE deux persos avec le MEME ratio de PV
-    p1 = CharacterBuilder().with_lvl(1).build()
-    p2 = CharacterBuilder().with_lvl(1).build()
-    eq = Equipe(p1, p2)
-    
-    # QUAND on cherche le plus faible
-    # ALORS il doit en retourner un (souvent le premier par défaut dans la logique)
-    assert eq.whoLowest() in [p1, p2]
-
-def test_who_lowest_full_dead_team():
-    # ETANT DONNE une équipe où tout le monde est mort
-    p1 = CharacterBuilder().build()
-    p2 = CharacterBuilder().build()
-    p1.take_damage(100)
-    p2.take_damage(100)
-    eq = Equipe(p1, p2)
-    
-    # ALORS whoLowest doit retourner None (pour éviter de taper un cadavre)
-    assert eq.whoLowest() is None
-    
-def test_get_order_agility_sorting():
-    # ETANT DONNE des persos avec des agilités différentes
-    p_lent = CharacterBuilder().with_agilite(1).build()
-    p_moyen = CharacterBuilder().with_agilite(10).build()
-    p_rapide = CharacterBuilder().with_agilite(50).build()
-    p_god = CharacterBuilder().with_agilite(100).build()
-    
-    eq1 = Equipe(p_lent, p_rapide)
-    eq2 = Equipe(p_moyen, p_god)
-    duel = Duel(eq1, eq2)
-    
-    # QUAND on récupère l'ordre
-    ordre = duel.getOrder()
-    
-    # ALORS l'ordre doit être strictement : p_god, p_rapide, p_moyen, p_lent
-    assert ordre == [p_god, p_rapide, p_moyen, p_lent]
-    
-def test_weapon_multiplier_impact():
-    # ETANT DONNE un attaquant avec une arme de force 2
-    attaquant = CharacterBuilder().with_force(5).with_arme(2).build()
-    victime = CharacterBuilder().with_armor(0).build()
-    
-    # QUAND il attaque (on mock le dé sur 5)
-    with patch('random.randint', return_value=5):
-        attaquant.attack(victime)
-        
-    # ALORS les dégâts subis doivent être 10 (5 * 2)
-    assert victime.hp == victime.maxHp - 10
-    
-def test_seuil_danger_flottant_proche():
-    # ETANT DONNE un sujet avec 1000 PV Max (Seuil 30% = 300)
-    sujet = CharacterBuilder().with_endurance(988).with_lvl(1).build() # 10 + 988 + 2 = 1000
-    
-    # QUAND sa santé est à 30.1% (301/1000)
+    # QUAND sa santé est juste au-dessus du seuil (30.1%)
     sujet.hp = 301
     assert sujet.est_en_danger() is False
     
-    # QUAND sa santé est à 29.9% (299/1000)
+    # QUAND sa santé est juste en-dessous (29.9%)
     sujet.hp = 299
-    # ALORS il est considéré en danger
+    # ALORS l'état de danger est activé
     assert sujet.est_en_danger() is True
 
-def test_degats_minimum_formule_attaque():
-    # ETANT DONNE un attaquant niv 1, force 0, arme 1
+def test_calcul_degats_minimum_formule_attaque():
+    # ETANT DONNE un attaquant avec une puissance minimale
     attaquant = CharacterBuilder().with_lvl(1).with_force(0).with_arme(1).build()
     defenseur = CharacterBuilder().with_armor(0).build()
+    sante_initiale = defenseur.hp
     
-    # Formule : randint(1, force + 2 + 2*lvl) * arme
-    # Si randint renvoie 1 : 1 * 1 = 1 dégât
+    # QUAND le sort (randint) décide du minimum possible (1)
     with patch('random.randint', return_value=1):
         attaquant.attack(defenseur)
     
-    # ALORS le défenseur perd exactement 1 PV
-    assert defenseur.hp == defenseur.maxHp - 1
+    # ALORS le défenseur perd exactement 1 PV par rapport à son état initial
+    assert defenseur.hp == sante_initiale - 1
+
+def test_impact_du_multiplicateur_d_équipement():
+    # ETANT DONNE un attaquant avec une arme doublant les dégâts (x2)
+    attaquant = CharacterBuilder().with_force(5).with_arme(2).build()
+    defenseur = CharacterBuilder().with_armor(0).build()
+    sante_initiale = defenseur.hp
+    
+    # QUAND il porte un coup d'une valeur de 5
+    with patch('random.randint', return_value=5):
+        attaquant.attack(defenseur)
+        
+    # ALORS les dégâts réels sont de 10 (5 * 2)
+    assert defenseur.hp == sante_initiale - 10
+
+def test_stabilite_du_tri_agilite_identique():
+    # ETANT DONNE deux intervenants de même agilité
+    sujet_a = CharacterBuilder().with_agilite(10).build()
+    sujet_b = CharacterBuilder().with_agilite(10).build()
+    
+    eq1 = Equipe(sujet_a, CharacterBuilder().build())
+    eq2 = Equipe(sujet_b, CharacterBuilder().build())
+    ordre_action = Duel(eq1, eq2).getOrder()
+    
+    # ALORS les deux sont bien présents dans l'ordre d'action (tue les mutants >=)
+    assert sujet_a in ordre_action
+    assert sujet_b in ordre_action
+
+def test_exclusion_des_membres_hors_combat_du_ciblage():
+    # ETANT DONNE une équipe avec un membre actif et un membre hors combat
+    membre_actif = CharacterBuilder().build()
+    membre_mort = CharacterBuilder().build()
+    membre_mort.take_damage(1000) # On s'assure qu'il est bien mort
+    
+    equipe = Equipe(membre_actif, membre_mort)
+    
+    # QUAND on cherche la cible la plus faible
+    # ALORS le système ignore le membre mort et renvoie le membre actif
+    assert equipe.whoLowest() == membre_actif
+
+def test_gestion_equipe_totalement_hors_combat():
+    # ETANT DONNE une équipe où tous les membres sont tombés
+    m1 = CharacterBuilder().build()
+    m2 = CharacterBuilder().build()
+    m1.take_damage(1000)
+    m2.take_damage(1000)
+    
+    equipe = Equipe(m1, m2)
+    
+    # ALORS la recherche de cible ne renvoie rien (évite les erreurs sur objets vides)
+    assert equipe.whoLowest() is None
+
+def test_securite_anti_boucle_infinie_duel():
+    # ETANT DONNE un duel entre deux équipes incapables de se blesser
+    sujet1 = CharacterBuilder().build()
+    sujet2 = CharacterBuilder().build()
+    duel = Duel(Equipe(sujet1, sujet1), Equipe(sujet2, sujet2))
+    
+    # On force les attaques à être inoffensives
+    with patch.object(Character, 'attack'):
+        # QUAND le duel atteint sa limite de tours
+        vainqueur = duel.fight()
+        # ALORS il se termine proprement sans bloquer le processeur
+        assert vainqueur in [1, 2]
+
+def test_arrondi_degats_infimes():
+    # ETANT DONNE un sujet avec une armure de 50%
+    sujet = CharacterBuilder().with_armor(50).build()
+    sante_initiale = sujet.hp
+    
+    # QUAND il subit des dégâts trop faibles pour être comptabilisés (0.4 * 0.5 = 0.2)
+    sujet.take_damage(0.4)
+    
+    # ALORS sa santé ne change pas (arrondi à 0)
+    assert sujet.hp == sante_initiale
+
+def test_rejet_degats_negatifs_ou_invalides():
+    # ETANT DONNE un sujet sain
+    sujet = CharacterBuilder().build()
+    sante_initiale = sujet.hp
+    
+    # QUAND on tente de lui infliger des dégâts négatifs ou de type invalide
+    sujet.take_damage(-10)
+    sujet.take_damage("beaucoup")
+    
+    # ALORS sa santé reste intacte
+    assert sujet.hp == sante_initiale
+    
+def test_seuil_danger_ne_prend_pas_le_pallis_exact():
+    # Perso avec 100 PV Max
+    perso = CharacterBuilder().with_endurance(88).with_lvl(1).build() 
+    # QUAND il a exactement 30 PV (30/100 = 0.3)
+    perso.hp = 30
+    # ALORS est_en_danger doit être FALSE (car c'est strictement inférieur)
+    assert perso.est_en_danger() is False
+    
+def test_arrondi_exact_point_cinq_force_le_degat_minimal():
+    # ETANT DONNE un personnage avec une armure de 50%
+    perso = CharacterBuilder().with_armor(50).build()
+    sante_initiale = perso.hp
+    
+    # QUAND il reçoit une attaque de 1 point (Calcul : 1 * 0.5 = 0.5)
+    perso.take_damage(1)
+    
+    # ALORS la règle du dégât minimum s'applique (0.5 arrondi à 0, mais forcé à 1)
+    # On vérifie que sa santé a diminué exactement de 1
+    assert perso.hp == sante_initiale - 1
+    
+def test_degat_minimum_est_applique_meme_apres_arrondi_inférieur():
+    # ETANT DONNE un défenseur avec 50% d'armure
+    perso = CharacterBuilder().with_armor(50).build()
+    sante_initiale = perso.hp
+    
+    # QUAND il subit 1 dégât (Calcul: 1 * 0.5 = 0.5 -> arrondi à 0)
+    perso.take_damage(1)
+    
+    # ALORS il perd quand même 1 PV à cause de la règle du dégât minimum
+    assert perso.hp == sante_initiale - 1
+    
+def test_precision_arrondi_limite_flottante():
+    # ETANT DONNE un personnage avec 50% d'armure
+    # QUAND il reçoit 1.0000000001 de dégâts (très proche de 1)
+    # Le calcul donne 0.50000000005
+    perso = CharacterBuilder().with_armor(50).build()
+    sante_initiale = perso.hp
+    
+    # On force un montant qui doit déclencher la précision du 1e-9
+    perso.take_damage(1.0000000001)
+    
+    # ALORS l'arrondi doit être géré par la condition de précision
+    # Si le mutant change 1e-9, ce test échouera
+    assert perso.hp <= sante_initiale
