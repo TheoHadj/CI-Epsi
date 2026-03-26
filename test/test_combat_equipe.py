@@ -25,20 +25,33 @@ def test_ciblage_automatique_du_membre_le_plus_faible():
     # ALORS c'est l'archer blessé qui est désigné
     assert cible == archer_blesse
 
-def test_victoire_logique_d_une_equipe_heroique_contre_des_monstres():
-    # ETANT DONNE une équipe de héros puissants face à des adversaires faibles
-    heros_1 = CharacterBuilder().with_lvl(100).with_force(50).with_agilite(10).build()
-    heros_2 = CharacterBuilder().with_lvl(100).with_force(50).with_agilite(10).build()
-    monstre_1 = CharacterBuilder().with_lvl(1).with_agilite(1).build()
-    monstre_2 = CharacterBuilder().with_lvl(1).with_agilite(1).build()
-    
-    equipe_heros = Equipe(heros_1, heros_2)
-    equipe_monstres = Equipe(monstre_1, monstre_2)
-    duel = Duel(equipe_heros, equipe_monstres)
-    
-    # QUAND le duel se déroule
-    vainqueur = duel.fight()
-    
-    # ALORS les héros remportent la victoire et les monstres sont vaincus
-    assert vainqueur == 1
-    assert equipe_monstres.isAlive() is False
+def test_victoire_duel_equipe_surpuissante():
+    # ETANT DONNE une équipe niveau 100 contre une équipe niveau 1
+    fort_1 = CharacterBuilder().with_lvl(100).with_force(50).with_agilite(10).build()
+    fort_2 = CharacterBuilder().with_lvl(100).with_force(50).with_agilite(10).build()
+    faible_1 = CharacterBuilder().with_lvl(1).with_agilite(1).build()
+    faible_2 = CharacterBuilder().with_lvl(1).with_agilite(1).build()
+
+    eq1 = Equipe(fort_1, fort_2)
+    eq2 = Equipe(faible_1, faible_2)
+    duel = Duel(eq1, eq2)
+
+    # QUAND le combat a lieu
+    gagnant = duel.fight()
+
+    # ALORS l'équipe 1 gagne forcément rapidement
+    assert gagnant == 1
+    assert eq2.isAlive() is False
+
+def test_equipe_morte_quand_tous_les_membres_sont_morts():
+    # ETANT DONNE deux personnages morts
+    p1 = CharacterBuilder().build()
+    p2 = CharacterBuilder().build()
+    p1.take_damage(100)
+    p2.take_damage(100)
+
+    # QUAND ils forment une équipe
+    equipe = Equipe(p1, p2)
+
+    # ALORS l'équipe est considérée comme morte
+    assert equipe.isAlive() is False
