@@ -23,23 +23,23 @@ class Character:
         return self.hp > 0
 
     def take_damage(self, amount):
-            if not isinstance(amount, (int, float)) or amount <= 0:
-                return
-                
-            reduction = self.armor / 100
-            reduced_amount = amount * (1 - reduction)
+        if not isinstance(amount, (int, float)) or amount <= 0:
+            return
             
-            if abs(reduced_amount % 1 - 0.5) < 1e-9:
-                final_damage = int(reduced_amount)
-            else:
-                final_damage = round(reduced_amount)
+        reduction = self.armor / 100
+        reduced_amount = amount * (1 - reduction)
+        
+        if abs(reduced_amount % 1 - 0.5) < 1e-9:
+            final_damage = int(reduced_amount)
+        else:
+            final_damage = round(reduced_amount)
+        
+        if amount >= 1 and final_damage <= 0 and reduction < 1:
+            final_damage = 1
             
-            if amount >= 1 and final_damage <= 0 and reduction < 1:
-                final_damage = 1
-                
-            self.hp -= final_damage
-            if self.hp < 0:
-                self.hp = 0
+        self.hp -= final_damage
+        if self.hp < 0:
+            self.hp = 0
 
     def attack(self, target):
         if self.is_alive() and target:
@@ -51,26 +51,29 @@ class Character:
         self.hp += 2
         self.maxHp += 2
         
+    def __str__(self):
+        return f"Aventurier (Niv. {self.lvl}) - Santé: {self.hp}/{self.maxHp}"
+
 class Equipe:
-    def __init__(self, perso1: Character, perso2: Character):
-        self.perso1 = perso1
-        self.perso2 = perso2
+    def __init__(self, membre1: Character, membre2: Character):
+        self.membre1 = membre1
+        self.membre2 = membre2
 
     def isAlive(self):
-        return self.perso1.is_alive() or self.perso2.is_alive()
+        return self.membre1.is_alive() or self.membre2.is_alive()
     
     def whoLowest(self):
-        p1_alive = self.perso1.is_alive()
-        p2_alive = self.perso2.is_alive()
+        m1_en_vie = self.membre1.is_alive()
+        m2_en_vie = self.membre2.is_alive()
         
-        if not p1_alive and not p2_alive: return None
-        if not p1_alive: return self.perso2
-        if not p2_alive: return self.perso1
+        if not m1_en_vie and not m2_en_vie: return None
+        if not m1_en_vie: return self.membre2
+        if not m2_en_vie: return self.membre1
         
-        ratio1 = self.perso1.hp / self.perso1.maxHp
-        ratio2 = self.perso2.hp / self.perso2.maxHp
+        ratio1 = self.membre1.hp / self.membre1.maxHp
+        ratio2 = self.membre2.hp / self.membre2.maxHp
         
-        return self.perso1 if ratio1 <= ratio2 else self.perso2
+        return self.membre1 if ratio1 <= ratio2 else self.membre2
 
 class Duel:
     def __init__(self, equipe1: Equipe, equipe2: Equipe):
@@ -78,21 +81,21 @@ class Duel:
         self.equipe2 = equipe2
         
     def fight(self):
-        limit = 0
-        while self.equipe1.isAlive() and self.equipe2.isAlive() and limit < 1000:
-            for p in self.getOrder():
-                if p.is_alive():
-                    enemy = self.get_enemy_team(p)
-                    target = enemy.whoLowest()
-                    if target: p.attack(target)
-            limit += 1
+        limite_tours = 0
+        while self.equipe1.isAlive() and self.equipe2.isAlive() and limite_tours < 1000:
+            for combattant in self.getOrder():
+                if combattant.is_alive():
+                    equipe_ennemie = self.get_enemy_team(combattant)
+                    cible = equipe_ennemie.whoLowest()
+                    if cible: combattant.attack(cible)
+            limite_tours += 1
         return 1 if self.equipe1.isAlive() else 2
         
     def getOrder(self):
-        tous = [self.equipe1.perso1, self.equipe1.perso2, self.equipe2.perso1, self.equipe2.perso2]
+        tous = [self.equipe1.membre1, self.equipe1.membre2, self.equipe2.membre1, self.equipe2.membre2]
         return sorted(tous, key=lambda p: p.agi, reverse=True)
     
-    def get_enemy_team(self, character):
-        if character in (self.equipe1.perso1, self.equipe1.perso2):
+    def get_enemy_team(self, combattant):
+        if combattant in (self.equipe1.membre1, self.equipe1.membre2):
             return self.equipe2
         return self.equipe1
