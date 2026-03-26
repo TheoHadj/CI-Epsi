@@ -97,3 +97,29 @@ def test_weapon_multiplier_impact():
         
     # ALORS les dégâts subis doivent être 10 (5 * 2)
     assert victime.hp == victime.maxHp - 10
+    
+def test_seuil_danger_flottant_proche():
+    # ETANT DONNE un sujet avec 1000 PV Max (Seuil 30% = 300)
+    sujet = CharacterBuilder().with_endurance(988).with_lvl(1).build() # 10 + 988 + 2 = 1000
+    
+    # QUAND sa santé est à 30.1% (301/1000)
+    sujet.hp = 301
+    assert sujet.est_en_danger() is False
+    
+    # QUAND sa santé est à 29.9% (299/1000)
+    sujet.hp = 299
+    # ALORS il est considéré en danger
+    assert sujet.est_en_danger() is True
+
+def test_degats_minimum_formule_attaque():
+    # ETANT DONNE un attaquant niv 1, force 0, arme 1
+    attaquant = CharacterBuilder().with_lvl(1).with_force(0).with_arme(1).build()
+    defenseur = CharacterBuilder().with_armor(0).build()
+    
+    # Formule : randint(1, force + 2 + 2*lvl) * arme
+    # Si randint renvoie 1 : 1 * 1 = 1 dégât
+    with patch('random.randint', return_value=1):
+        attaquant.attack(defenseur)
+    
+    # ALORS le défenseur perd exactement 1 PV
+    assert defenseur.hp == defenseur.maxHp - 1

@@ -29,3 +29,24 @@ def test_erreur_niveau_negatif():
     # ALORS une erreur ValueError est levée
     with pytest.raises(ValueError):
         Character(level=niveau_invalide)
+        
+def test_erreur_armure_hors_limite_basse():
+    # ETANT DONNE une protection invalide de -1
+    # QUAND on tente de créer le personnage
+    # ALORS une erreur est levée
+    with pytest.raises(ValueError):
+        Character(armor=-1)
+
+def test_erreur_niveau_negatif_strict():
+    # ETANT DONNE un niveau de -5
+    # QUAND on tente de créer le personnage
+    # ALORS une erreur est levée
+    with pytest.raises(ValueError):
+        Character(level=-5)
+
+def test_erreur_multiplicateur_arme_negatif():
+    # ETANT DONNE un multiplicateur d'arme de -2
+    # QUAND on tente de créer le personnage
+    # ALORS une erreur est levée
+    with pytest.raises(ValueError):
+        Character(arme=-2)
