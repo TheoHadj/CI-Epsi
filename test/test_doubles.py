@@ -1,32 +1,32 @@
 from unittest.mock import MagicMock
 from RPG.RPG import Character, Equipe
 
-def test_attaque_appelle_take_damage_sur_cible():
-    # ETANT DONNE un attaquant et une cible factice (Mock)
+def test_l_action_d_attaquer_declenche_la_reception_de_degats():
+    # ETANT DONNE un attaquant et un défenseur simulé (Mock)
     attaquant = Character(level=1)
-    cible_mock = MagicMock(spec=Character)
-    cible_mock.is_alive.return_value = True
+    defenseur_fantome = MagicMock(spec=Character)
+    defenseur_fantome.is_alive.return_value = True
     
-    # QUAND l'attaquant attaque la cible
-    attaquant.attack(cible_mock)
+    # QUAND l'attaquant lance une offensive
+    attaquant.attack(defenseur_fantome)
     
-    # ALORS la méthode take_damage de la cible doit être appelée
-    assert cible_mock.take_damage.called
+    # ALORS le défenseur doit enregistrer l'impact de l'attaque
+    assert defenseur_fantome.take_damage.called
 
-def test_who_lowest_calcul_ratio_correct():
-    # ETANT DONNE une équipe avec des doublures dont on contrôle les PV
-    p1 = MagicMock(spec=Character)
-    p1.hp = 10
-    p1.maxHp = 20 # 50%
+def test_choix_du_membre_le_plus_vulnerable_selon_sa_sante_relative():
+    # ETANT DONNE une équipe avec deux membres aux états de santé différents
+    premier_membre = MagicMock(spec=Character)
+    premier_membre.hp = 10
+    premier_membre.maxHp = 20 # 50% de santé
     
-    p2 = MagicMock(spec=Character)
-    p2.hp = 5
-    p2.maxHp = 20 # 25%
+    second_membre = MagicMock(spec=Character)
+    second_membre.hp = 5
+    second_membre.maxHp = 20 # 25% de santé
     
-    equipe = Equipe(p1, p2)
+    equipe = Equipe(premier_membre, second_membre)
     
-    # QUAND on demande le plus faible
-    resultat = equipe.whoLowest()
+    # QUAND on demande d'identifier le membre le plus affaibli
+    plus_faible = equipe.whoLowest()
     
-    # ALORS c'est p2 qui est choisi
-    assert resultat == p2
+    # ALORS c'est le second membre qui est correctement identifié
+    assert plus_faible == second_membre

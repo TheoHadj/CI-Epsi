@@ -1,47 +1,47 @@
 from unittest.mock import patch
 from test.utils.PersonnageBuilder import CharacterBuilder
 
-def test_reduction_degats_par_armure():
-    # ETANT DONNE une victime avec 50% d'armure et 12 PV
-    victime = CharacterBuilder().with_armor(50).with_lvl(1).with_endurance(0).build()
-    pv_initiaux = victime.hp
+def test_reduction_des_dommages_par_la_protection_physique():
+    # ETANT DONNE un défenseur disposant de 50% de protection
+    defenseur = CharacterBuilder().with_armor(50).with_lvl(1).build()
+    sante_initiale = defenseur.hp
     
-    # QUAND elle subit 10 points de dégâts bruts
-    victime.take_damage(10)
+    # QUAND il reçoit une attaque de 10 points de dommages
+    defenseur.take_damage(10)
     
-    # ALORS elle ne perd que 5 PV (10 * 0.5)
-    assert victime.hp == pv_initiaux - 5
+    # ALORS sa santé ne diminue que de 5 points (moitié des dégâts)
+    assert defenseur.hp == sante_initiale - 5
 
-def test_immunite_armure_cent_pour_cent():
-    # ETANT DONNE une victime avec 100% d'armure
-    victime = CharacterBuilder().with_armor(100).build()
-    pv_initiaux = victime.hp
+def test_invulnerabilite_avec_une_protection_totale():
+    # ETANT DONNE un chevalier en armure complète (100% protection)
+    chevalier = CharacterBuilder().with_armor(100).build()
+    sante_initiale = chevalier.hp
     
-    # QUAND elle subit 100 points de dégâts
-    victime.take_damage(100)
+    # QUAND il subit une attaque massive de 100 points
+    chevalier.take_damage(100)
     
-    # ALORS ses PV ne changent pas
-    assert victime.hp == pv_initiaux
+    # ALORS sa santé reste inchangée
+    assert chevalier.hp == sante_initiale
 
-def test_degats_aleatoires_bornes():
-    # ETANT DONNE un attaquant niveau 1 (force 0)
+def test_calcul_des_dommages_aleatoires_selon_la_force():
+    # ETANT DONNE un attaquant de niveau 1
     attaquant = CharacterBuilder().with_lvl(1).with_force(0).build()
-    victime = CharacterBuilder().build()
+    cible = CharacterBuilder().build()
     
-    # QUAND il attaque avec un jet de dé fixé au maximum (randint = force + 1 + 2*lvl = 3)
+    # QUAND il porte un coup critique (jet de dé au maximum)
     with patch('random.randint', return_value=3):
-        attaquant.attack(victime)
+        attaquant.attack(cible)
         
-    # ALORS la victime perd exactement 3 PV
-    assert victime.hp == victime.maxHp - 3
+    # ALORS la cible subit exactement la valeur de l'attaque
+    assert cible.hp == cible.maxHp - 3
 
-def test_mort_personnage():
-    # ETANT DONNE un personnage avec 12 PV
-    perso = CharacterBuilder().with_lvl(1).build()
+def test_trepas_du_personnage_hors_de_combat():
+    # ETANT DONNE un aventurier fragile
+    aventurier = CharacterBuilder().with_lvl(1).build()
     
-    # QUAND il subit des dégâts supérieurs à sa vie
-    perso.take_damage(20)
+    # QUAND il subit des blessures fatales
+    aventurier.take_damage(20)
     
-    # ALORS ses PV tombent à 0 et il est considéré comme mort
-    assert perso.hp == 0
-    assert not perso.is_alive()
+    # ALORS sa santé tombe à zéro et il n'est plus en vie
+    assert aventurier.hp == 0
+    assert not aventurier.is_alive()
