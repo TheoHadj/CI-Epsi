@@ -1,7 +1,0 @@
-__pycache__/
-
-.pytest_cache/
-.vscode/settings.json
-.DS_Store
-.venv/
-.venv_linux/

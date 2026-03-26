@@ -1,16 +1,6 @@
 from RPG.RPG import Character
 
-
 class CharacterBuilder:
-
-    @staticmethod
-    def stub():
-        return CharacterBuilder().build()
-
-    @staticmethod
-    def sac_de_frappe():
-        return CharacterBuilder().with_endurance(1000).with_lvl(1000).build()
-
     def __init__(self):
         self._force = 0
         self._endurance = 0
@@ -49,16 +39,12 @@ class CharacterBuilder:
         return self
 
     def build(self):
-        c = Character(
+        return Character(
+            level=self._lvl,
+            end=self._endurance,
+            force=self._force,
+            agi=self._agilite,
+            chn=self._chance,
             armor=self._armor,
             arme=self._arme
         )
-
-        c.force = self._force
-        c.endurance = self._endurance
-        c.agi = self._agilite
-        # c.chn = self._chance
-        c.lvl = self._lvl
-        c.hp = c.baseHp + c.endurance + 2*c.lvl
-
-        return c
